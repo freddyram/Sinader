@@ -109,13 +109,13 @@
         },
 
         save(){
-            var tranport = {    
+            var carrier = {    
             rut: this.rut,  
             name : this.name, 
             plate: this.plate, 
             }
 
-            axios.post('/api//carrier/savenotregistered', transport)
+            axios.post('/api//carrier/savenotregistered', carrier)
                 .then(function (resp) {    
                     EventBus.$emit('saveTransport', 'someValue');
                 })
@@ -124,7 +124,7 @@
                 });
             this.dialog = false;
 
-            
+
         }
     }
   }

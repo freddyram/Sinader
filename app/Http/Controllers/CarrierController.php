@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Carrier;
+use App\CarrierNotRegistered;
 use Illuminate\Http\Request;
 
 class CarrierController extends Controller
@@ -73,6 +74,8 @@ class CarrierController extends Controller
         
    	}
 
+
+
    	public function delete($id)
     {
         Info($id);
@@ -83,5 +86,10 @@ class CarrierController extends Controller
     }
 
 
+    public function saveNotRegistered(Request $request){
+
+        Info($request);
+
+    }
 
 }

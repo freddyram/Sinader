@@ -177,6 +177,10 @@
         EventBus.$once('selectCarrier', function(){  
             app.refreshCarrier();
         });
+        EventBus.$once('saveTransport', function(){  
+            app.refreshCarrierNotReg();
+        });
+
     },
     methods:{
         initialize(){
@@ -205,6 +209,10 @@
             this.changeCarrier(this.$store.getters.carrier);
         },
 
+        refreshCarrierNotReg{
+
+        },
+
         changeCarrier(carrier_selected){
           this.carrier_selected = carrier_selected;
             var app = this;
@@ -219,6 +227,8 @@
                 });
 
         },
+
+
 
         changeVehicle(vehicle_selected){
             this.vehicle_selected = vehicle_selected;
@@ -248,6 +258,8 @@
         val_move_date(){
             this.menu1 = false;            
         },
+
+
 
         saveCarrier(){
             var transport={
