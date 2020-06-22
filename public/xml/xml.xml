@@ -1,0 +1,42 @@
+<mxGraphModel>
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="2" value="&lt;h4 style=&quot;margin:0px;&quot;&gt;Convertidor &lt;br&gt;Teniente &lt;/h4&gt;&lt;br&gt;&lt;button class=&quot;generate&quot; source=7 id=&quot;id0&quot;&gt;Registrar&lt;/button&gt;" style="fillColor=#ffffff" vertex="1" parent="1">
+      <mxGeometry x="520" y="270" width="120" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="5" value="7" style="port;image=/images/warning.gif?957abee46777a98969e65ec3b2d1dbf8;spacingLeft=18" vertex="1" connectable="0" parent="2">
+      <mxGeometry x="1" y="0.75" width="16" height="16" relative="1" as="geometry">
+        <mxPoint x="-8" y="-4" as="offset"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="3" value="Inicio" style="shape=ellipse;perimeter=ellipsePerimeter" vertex="1" parent="1">
+      <mxGeometry x="200" y="200" width="80" height="60" as="geometry"/>
+    </mxCell>
+    <mxCell id="4" value="" edge="1" parent="1" source="3" target="2">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="6" value="&lt;h4 style=&quot;margin:0px;&quot;&gt;Chimenea&lt;/h4&gt;&lt;br&gt;&lt;button class=&quot;generate&quot; source=8 id=&quot;id1&quot;&gt;" style="fillColor=#FFDC00" vertex="1" parent="1">
+      <mxGeometry x="810" y="170" width="120" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="7" value="8" style="port;image=/images/warning.gif?957abee46777a98969e65ec3b2d1dbf8;spacingLeft=18" vertex="1" connectable="0" parent="6">
+      <mxGeometry x="1" y="0.75" width="16" height="16" relative="1" as="geometry">
+        <mxPoint x="-8" y="-4" as="offset"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="8" value="&lt;h4 style=&quot;margin:0px;&quot;&gt;Scrubber&lt;/h4&gt;&lt;br&gt;&lt;button class=&quot;generate&quot; source=9 id=&quot;id2&quot;&gt;" style="fillColor=#7FDBFF" vertex="1" parent="1">
+      <mxGeometry x="820" y="400" width="120" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="9" value="9" style="port;image=/images/warning.gif?957abee46777a98969e65ec3b2d1dbf8;spacingLeft=18" vertex="1" connectable="0" parent="8">
+      <mxGeometry x="1" y="0.75" width="16" height="16" relative="1" as="geometry">
+        <mxPoint x="-8" y="-4" as="offset"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="10" value="" edge="1" parent="1" source="2" target="6">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+    <mxCell id="11" value="" edge="1" parent="1" source="2" target="8">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+  </root>
+</mxGraphModel>
