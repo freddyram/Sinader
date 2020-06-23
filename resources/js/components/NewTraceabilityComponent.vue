@@ -213,8 +213,6 @@
 
             this.residue  = this.waste_detail.waste;
             this.cantidad = this.waste_detail.quantity;
-            
-
 
             var app = this;
 

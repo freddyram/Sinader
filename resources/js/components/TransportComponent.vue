@@ -60,25 +60,7 @@
                         <v-flex xs12 class="px-1">                         
                             <v-text-field color="main_green" box placeholder="Seleccionar" @click='toSearch' v-model="transport"  readonly label="Empresa Trasnporte"></v-text-field>
                         </v-flex>    
-         <!--                <v-flex xs2 class="px-1">
-                            <v-btn text icon color="grey lighten-2" @click='toSearch' >
-                                <v-icon>search</v-icon>
-                            </v-btn>
-                        </v-flex> -->
                     </v-layout>
-<!--                     <v-layout>
-                        <v-flex xs12 class="px-1">
-                            <v-select
-                                :items="vehicle_types"
-                                v-model="type"
-                                label="Tipo de Vehículo"
-                                item-text="name"  
-                                :rules = "generalRule"
-                                v-on:change="changeVehicleType"
-                                return-object
-                            ></v-select> 
-                        </v-flex>
-                    </v-layout> -->
                     <v-layout>
                         <v-flex xs12 class="px-1">
                             <v-select
@@ -158,14 +140,12 @@
         menu1: false,
 
         carrier:'',
-        vehicle_type:'',
         vahicle:'',
         trasnport:'',
 
         texto: 'Atención: Si el transporte no se encuentra en el listado, incorporelo a su declaración. Este listado será informado a los servicios fiscalizadores',
 
         carriers: [],
-        vehicle_types: [],
         vehicles: [],    
 
         }
@@ -194,22 +174,22 @@
             //         alert("Error carrier :" + resp);
             //     });
 
-            axios.get('/api/vehicletype')
-                .then(function (resp) {    
-                    app.vehicle_types = resp.data;
-                })
-                .catch(function (resp) {
-                    console.log(resp);
-                });
+            // axios.get('/api/vehicletype')
+            //     .then(function (resp) {    
+            //         app.vehicle_types = resp.data;
+            //     })
+            //     .catch(function (resp) {
+            //         console.log(resp);
+            //     });
         },
 
         refreshCarrier(){
-            
             this.transport = this.$store.getters.carrier.name;
             this.changeCarrier(this.$store.getters.carrier);
         },
 
-        refreshCarrierNotReg{
+        refreshCarrierNotReg(){
+
 
         },
 
