@@ -9314,7 +9314,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     toReceive: function toReceive($declaration) {
-      var ComponentReserv = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_NewReceiveComponent__WEBPACK_IMPORTED_MODULE_5__["default"]);
+      var ComponentReserv = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_ReceiveComponent__WEBPACK_IMPORTED_MODULE_4__["default"]);
       var instance = new ComponentReserv({
         store: this.$store,
         propsData: {
@@ -20157,7 +20157,7 @@ var render = function() {
                                         },
                                         on: {
                                           click: function($event) {
-                                            return _vm.toReceive(props.item)
+                                            return _vm.toNewReceive(props.item)
                                           }
                                         }
                                       },
