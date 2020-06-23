@@ -71,7 +71,7 @@
 
 
         <td> 
-            <v-btn  v-if="props.item.status=='CREADA'" small @click="toReceive(props.item)" color="main_green" dark>Editar</v-btn>
+            <v-btn  v-if="props.item.status=='CREADA'" small @click="toNewReceive(props.item)" color="main_green" dark>Editar</v-btn>
         </td>   
       </template>
     </v-data-table>
@@ -159,7 +159,7 @@
 
 
         toReceive ($declaration){
-            var ComponentReserv = Vue.extend(NewReceiveComponent)
+            var ComponentReserv = Vue.extend(DeclarationComponent)
             var instance = new ComponentReserv({store: this.$store, propsData: {
             declaration_edit: $declaration,
              

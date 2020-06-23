@@ -31,13 +31,13 @@
                         
             <v-layout>
                 <v-flex  xs12 class="px-1">
-                    <v-text-field rules='notnullRule' v-model="name" label="Nombre Empresa o Persona Natural"></v-text-field>
+                    <v-text-field :rules='notnullRule' v-model="name" label="Nombre Empresa o Persona Natural"></v-text-field>
                 </v-flex>
             </v-layout>   
 
             <v-layout>
                 <v-flex  xs12 class="px-1">
-                    <v-text-field rules='notnullRule' v-model="plate" label="Patente"></v-text-field>
+                    <v-text-field :rules='notnullRule' v-model="plate" label="Patente"></v-text-field>
                 </v-flex>
             </v-layout> 
 
@@ -50,7 +50,7 @@
           <v-btn
             color="main_green"
             class='white--text'
-            @click="dialog = false"
+            @click="save"
           >
             Guardar
           </v-btn>
@@ -61,8 +61,8 @@
 </template>
 
 <script>
-
-
+  
+  import { EventBus } from './../eventbus.js';
 
   export default {
     data () {
@@ -109,21 +109,30 @@
         },
 
         save(){
+            var tmp     = this.rut.split('-');
+            var digv    = tmp[1]; 
+            var rut     = tmp[0];
+
             var carrier = {    
-            rut: this.rut,  
+            rut: rut,  
+            dv: digv,  
             name : this.name, 
             plate: this.plate, 
+            establishment_id: this.$store.getters.establishment.id
             }
 
-            axios.post('/api//carrier/savenotregistered', carrier)
+            alert(JSON.stringify(carrier));
+
+            axios.post('/api/carrier/savenotregistered', carrier)
                 .then(function (resp) {    
                     EventBus.$emit('saveTransport', 'someValue');
                 })
                 .catch(function (resp) {
                     console.log(resp);
-                });
-            this.dialog = false;
+                    alert(resp);
+            });
 
+            this.dialog = false;
 
         }
     }

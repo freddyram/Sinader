@@ -74,6 +74,7 @@ Route::middleware('auth:api')->group(function () {
 	Route::get('/unit/forid/{id}', 'UnitController@forid');
 
 	Route::get('/carriers', 'CarrierController@data');
+	Route::get('/carriers/notregistered', 'CarrierController@notRegistered');
 	Route::get('/carrier/forid/{id}', 'CarrierController@forid');
 	Route::get('/carriers/search', 'CarrierController@search');
 
