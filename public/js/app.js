@@ -6365,7 +6365,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _eventbus_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../eventbus.js */ "./resources/js/eventbus.js");
-/* harmony import */ var _components_DeclarationComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../components/DeclarationComponent */ "./resources/js/components/DeclarationComponent.vue");
 //
 //
 //
@@ -6421,7 +6420,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 
 
@@ -6490,7 +6488,8 @@ __webpack_require__.r(__webpack_exports__);
       var options = {
         headers: {
           'Authorization': 'Bearer ' + this.$store.getters.token
-        }
+        } //alert("exportar :" +  this.$store.getters.token);
+
       };
       axios({
         method: 'GET',

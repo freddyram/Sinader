@@ -4,8 +4,9 @@ namespace App\Exports;
 
 use App\MonthWaste;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class MonthWasteExport implements FromCollection
+class MonthWasteExport implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -15,9 +16,9 @@ class MonthWasteExport implements FromCollection
         return MonthWaste::all();
     }
 
-    
-    public function headings()
+
+    public function headings(): array
     {
-        return ["ler", "rut", "Establecimiento","tratamiento","cantidad","Region","rut_transportista","patente","fecha","gestion"];
+        return ['ler', 'rut', 'Establecimiento','tratamiento','cantidad','Region','rut_transportista','patente','fecha','gestion'];
     }
 }

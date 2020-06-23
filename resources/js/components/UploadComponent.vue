@@ -59,9 +59,7 @@
   import { mapState } from 'vuex';  
 
   import { EventBus } from './../eventbus.js';
-  
-  import DeclarationComponent  from './../components/DeclarationComponent';
-  
+
   export default {
     data: () => ({
         dialog: true,
@@ -138,6 +136,7 @@
                     }
                   }
 
+                //alert("exportar :" +  this.$store.getters.token);
 
                 axios({
                     method:'GET',
