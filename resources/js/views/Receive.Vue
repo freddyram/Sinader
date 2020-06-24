@@ -160,7 +160,7 @@
 
         toReceive ($declaration){
 
-            var ComponentReserv = Vue.extend(NewReceiveComponent)
+            var ComponentReserv = Vue.extend(DeclarationComponent)
             var instance = new ComponentReserv({store: this.$store, propsData: {
             declaration_edit: $declaration,
              
