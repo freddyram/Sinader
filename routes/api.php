@@ -74,12 +74,17 @@ Route::middleware('auth:api')->group(function () {
 	Route::get('/unit/forid/{id}', 'UnitController@forid');
 
 	Route::get('/carriers', 'CarrierController@data');
+<<<<<<< HEAD
 	Route::get('/carriers/notregistered', 'CarrierController@notRegistered');
 	Route::get('/carrier/forid/{id}', 'CarrierController@forid');
 	Route::get('/carriers/search', 'CarrierController@search');
 
 	Route::post('/carrier/savenotregistered', 'CarrierController@saveNotRegistered');
 	
+=======
+	Route::get('/carrier/forid/{id}', 'CarrierController@forid');
+	Route::get('/carriers/search', 'CarrierController@search');
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
 	Route::get('/vehicletype', 'VehicleTypeController@data');
 	Route::get('/vehicle/{carrier_id}', 'VehicleController@data');
 

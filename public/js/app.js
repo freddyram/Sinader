@@ -5213,7 +5213,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+<<<<<<< HEAD
 /* harmony import */ var _eventbus_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../eventbus.js */ "./resources/js/eventbus.js");
+=======
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
 //
 //
 //
@@ -5276,6 +5279,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5288,6 +5292,11 @@ __webpack_require__.r(__webpack_exports__);
       }, function (v) {
         return /^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(v) || "Formato incorrecto";
       }],
+=======
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
       checkbox: false,
       dialog: true,
       rut: '',
@@ -5301,6 +5310,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     initialize: function initialize() {
       alert('Validación SII, pendiente');
+<<<<<<< HEAD
     },
     validateRut: function validateRut(rutCompleto) {
       var app = this;
@@ -5347,6 +5357,8 @@ __webpack_require__.r(__webpack_exports__);
         alert(resp);
       });
       this.dialog = false;
+=======
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
     }
   }
 });
@@ -6286,6 +6298,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
+=======
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
 
 
 
@@ -6299,10 +6332,18 @@ __webpack_require__.r(__webpack_exports__);
       dialog: true,
       menu1: false,
       carrier: '',
+<<<<<<< HEAD
+=======
+      vehicle_type: '',
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
       vahicle: '',
       trasnport: '',
       texto: 'Atención: Si el transporte no se encuentra en el listado, incorporelo a su declaración. Este listado será informado a los servicios fiscalizadores',
       carriers: [],
+<<<<<<< HEAD
+=======
+      vehicle_types: [],
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
       vehicles: []
     };
   },
@@ -6312,9 +6353,12 @@ __webpack_require__.r(__webpack_exports__);
     _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$once('selectCarrier', function () {
       app.refreshCarrier();
     });
+<<<<<<< HEAD
     _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$once('saveTransport', function () {
       app.refreshCarrierNotReg();
     });
+=======
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
   },
   methods: {
     initialize: function initialize() {
@@ -6326,6 +6370,7 @@ __webpack_require__.r(__webpack_exports__);
       //         console.log(resp);
       //         alert("Error carrier :" + resp);
       //     });
+<<<<<<< HEAD
       // axios.get('/api/vehicletype')
       //     .then(function (resp) {    
       //         app.vehicle_types = resp.data;
@@ -6333,12 +6378,23 @@ __webpack_require__.r(__webpack_exports__);
       //     .catch(function (resp) {
       //         console.log(resp);
       //     });
+=======
+
+      axios.get('/api/vehicletype').then(function (resp) {
+        app.vehicle_types = resp.data;
+      })["catch"](function (resp) {
+        console.log(resp);
+      });
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
     },
     refreshCarrier: function refreshCarrier() {
       this.transport = this.$store.getters.carrier.name;
       this.changeCarrier(this.$store.getters.carrier);
     },
+<<<<<<< HEAD
     refreshCarrierNotReg: function refreshCarrierNotReg() {},
+=======
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
     changeCarrier: function changeCarrier(carrier_selected) {
       this.carrier_selected = carrier_selected;
       var app = this;
@@ -9314,7 +9370,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     toReceive: function toReceive($declaration) {
+<<<<<<< HEAD
       var ComponentReserv = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_ReceiveComponent__WEBPACK_IMPORTED_MODULE_4__["default"]);
+=======
+      var ComponentReserv = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_NewReceiveComponent__WEBPACK_IMPORTED_MODULE_5__["default"]);
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
       var instance = new ComponentReserv({
         store: this.$store,
         propsData: {
@@ -15198,12 +15258,16 @@ var render = function() {
                         { staticClass: "px-1", attrs: { xs12: "" } },
                         [
                           _c("v-text-field", {
+<<<<<<< HEAD
                             ref: "rut",
                             attrs: {
                               rules: _vm.rutRule,
                               label: "Rut Empresa o Persona Natural"
                             },
                             on: { change: _vm.validateRut },
+=======
+                            attrs: { label: "Rut Empresa o Persona Natural" },
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
                             model: {
                               value: _vm.rut,
                               callback: function($$v) {
@@ -15228,7 +15292,10 @@ var render = function() {
                         [
                           _c("v-text-field", {
                             attrs: {
+<<<<<<< HEAD
                               rules: _vm.notnullRule,
+=======
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
                               label: "Nombre Empresa o Persona Natural"
                             },
                             model: {
@@ -15254,7 +15321,11 @@ var render = function() {
                         { staticClass: "px-1", attrs: { xs12: "" } },
                         [
                           _c("v-text-field", {
+<<<<<<< HEAD
                             attrs: { rules: _vm.notnullRule, label: "Patente" },
+=======
+                            attrs: { label: "Patente" },
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
                             model: {
                               value: _vm.plate,
                               callback: function($$v) {
@@ -15285,7 +15356,15 @@ var render = function() {
                     {
                       staticClass: "white--text",
                       attrs: { color: "main_green" },
+<<<<<<< HEAD
                       on: { click: _vm.save }
+=======
+                      on: {
+                        click: function($event) {
+                          _vm.dialog = false
+                        }
+                      }
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
                     },
                     [_vm._v("\n            Guardar\n          ")]
                   )
@@ -20157,7 +20236,11 @@ var render = function() {
                                         },
                                         on: {
                                           click: function($event) {
+<<<<<<< HEAD
                                             return _vm.toNewReceive(props.item)
+=======
+                                            return _vm.toReceive(props.item)
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
                                           }
                                         }
                                       },
@@ -64016,15 +64099,23 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************************!*\
   !*** ./resources/js/components/TransportComponent.vue ***!
   \********************************************************/
+<<<<<<< HEAD
 /*! no static exports found */
+=======
+/*! exports provided: default */
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TransportComponent_vue_vue_type_template_id_ca05b902___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TransportComponent.vue?vue&type=template&id=ca05b902& */ "./resources/js/components/TransportComponent.vue?vue&type=template&id=ca05b902&");
 /* harmony import */ var _TransportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TransportComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/TransportComponent.vue?vue&type=script&lang=js&");
+<<<<<<< HEAD
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _TransportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _TransportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+=======
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
 
 
 
@@ -64054,7 +64145,11 @@ component.options.__file = "resources/js/components/TransportComponent.vue"
 /*!*********************************************************************************!*\
   !*** ./resources/js/components/TransportComponent.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************/
+<<<<<<< HEAD
 /*! no static exports found */
+=======
+/*! exports provided: default */
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

@@ -60,7 +60,29 @@
                         <v-flex xs12 class="px-1">                         
                             <v-text-field color="main_green" box placeholder="Seleccionar" @click='toSearch' v-model="transport"  readonly label="Empresa Trasnporte"></v-text-field>
                         </v-flex>    
+<<<<<<< HEAD
                     </v-layout>
+=======
+         <!--                <v-flex xs2 class="px-1">
+                            <v-btn text icon color="grey lighten-2" @click='toSearch' >
+                                <v-icon>search</v-icon>
+                            </v-btn>
+                        </v-flex> -->
+                    </v-layout>
+<!--                     <v-layout>
+                        <v-flex xs12 class="px-1">
+                            <v-select
+                                :items="vehicle_types"
+                                v-model="type"
+                                label="Tipo de Vehículo"
+                                item-text="name"  
+                                :rules = "generalRule"
+                                v-on:change="changeVehicleType"
+                                return-object
+                            ></v-select> 
+                        </v-flex>
+                    </v-layout> -->
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
                     <v-layout>
                         <v-flex xs12 class="px-1">
                             <v-select
@@ -140,12 +162,20 @@
         menu1: false,
 
         carrier:'',
+<<<<<<< HEAD
+=======
+        vehicle_type:'',
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
         vahicle:'',
         trasnport:'',
 
         texto: 'Atención: Si el transporte no se encuentra en el listado, incorporelo a su declaración. Este listado será informado a los servicios fiscalizadores',
 
         carriers: [],
+<<<<<<< HEAD
+=======
+        vehicle_types: [],
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
         vehicles: [],    
 
         }
@@ -157,10 +187,13 @@
         EventBus.$once('selectCarrier', function(){  
             app.refreshCarrier();
         });
+<<<<<<< HEAD
         EventBus.$once('saveTransport', function(){  
             app.refreshCarrierNotReg();
         });
 
+=======
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
     },
     methods:{
         initialize(){
@@ -174,6 +207,7 @@
             //         alert("Error carrier :" + resp);
             //     });
 
+<<<<<<< HEAD
             // axios.get('/api/vehicletype')
             //     .then(function (resp) {    
             //         app.vehicle_types = resp.data;
@@ -184,15 +218,31 @@
         },
 
         refreshCarrier(){
+=======
+            axios.get('/api/vehicletype')
+                .then(function (resp) {    
+                    app.vehicle_types = resp.data;
+                })
+                .catch(function (resp) {
+                    console.log(resp);
+                });
+        },
+
+        refreshCarrier(){
+            
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
             this.transport = this.$store.getters.carrier.name;
             this.changeCarrier(this.$store.getters.carrier);
         },
 
+<<<<<<< HEAD
         refreshCarrierNotReg(){
 
 
         },
 
+=======
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
         changeCarrier(carrier_selected){
           this.carrier_selected = carrier_selected;
             var app = this;
@@ -208,8 +258,11 @@
 
         },
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
         changeVehicle(vehicle_selected){
             this.vehicle_selected = vehicle_selected;
         },
@@ -239,8 +292,11 @@
             this.menu1 = false;            
         },
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
         saveCarrier(){
             var transport={
                 transport_date: this.move_date,

@@ -25,19 +25,31 @@
         <v-card-text>
             <v-layout>
                 <v-flex  xs12 class="px-1">
+<<<<<<< HEAD
                     <v-text-field ref="rut" v-model="rut" :rules='rutRule' @change='validateRut' label="Rut Empresa o Persona Natural"></v-text-field>
+=======
+                    <v-text-field  v-model="rut" label="Rut Empresa o Persona Natural"></v-text-field>
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
                 </v-flex>
             </v-layout>    
                         
             <v-layout>
                 <v-flex  xs12 class="px-1">
+<<<<<<< HEAD
                     <v-text-field :rules='notnullRule' v-model="name" label="Nombre Empresa o Persona Natural"></v-text-field>
+=======
+                    <v-text-field  v-model="name" label="Nombre Empresa o Persona Natural"></v-text-field>
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
                 </v-flex>
             </v-layout>   
 
             <v-layout>
                 <v-flex  xs12 class="px-1">
+<<<<<<< HEAD
                     <v-text-field :rules='notnullRule' v-model="plate" label="Patente"></v-text-field>
+=======
+                    <v-text-field  v-model="plate" label="Patente"></v-text-field>
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
                 </v-flex>
             </v-layout> 
 
@@ -50,7 +62,11 @@
           <v-btn
             color="main_green"
             class='white--text'
+<<<<<<< HEAD
             @click="save"
+=======
+            @click="dialog = false"
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
           >
             Guardar
           </v-btn>
@@ -61,15 +77,23 @@
 </template>
 
 <script>
+<<<<<<< HEAD
   
   import { EventBus } from './../eventbus.js';
+=======
+
+
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
 
   export default {
     data () {
       return {
+<<<<<<< HEAD
         notnullRule: [(v) => !!v || "Campo requerido"],
         rutRule: [(v) => !!v || "Campo requerido", (v) => /^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(v) || "Formato incorrecto"],
 
+=======
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
         checkbox:false,
         dialog: true,
         rut:'',
@@ -85,6 +109,7 @@
     methods: {
         initialize(){
             alert('Validación SII, pendiente')
+<<<<<<< HEAD
         },
 
         validateRut (rutCompleto) {
@@ -134,6 +159,8 @@
 
             this.dialog = false;
 
+=======
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
         }
     }
   }

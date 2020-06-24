@@ -213,6 +213,11 @@
 
             this.residue  = this.waste_detail.waste;
             this.cantidad = this.waste_detail.quantity;
+<<<<<<< HEAD
+=======
+            
+
+>>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
 
             var app = this;
 
