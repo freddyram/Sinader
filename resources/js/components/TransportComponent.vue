@@ -27,6 +27,7 @@
 
 
         <v-card-text>
+           <v-form ref="form"  lazy-validation>
                         <v-layout>
                         <v-flex xs12 class="px-1">
                             <v-col cols="12" lg="6">
@@ -46,6 +47,7 @@
                                       persistent-hint
                                       prepend-icon="event"
                                       readonly
+                                      :rules="notnullRule"
                                       v-on="on"
                                     ></v-text-field>
                                   </template>
@@ -68,7 +70,7 @@
                                 v-model="vehicle"
                                 label="Patente"
                                 item-text="plate"  
-                                :rules = "generalRule"
+                                :rules = "notnullRule"
                                 v-on:change="changeVehicle"
                                 return-object
                             ></v-select> 
@@ -96,7 +98,7 @@
                             ></v-select> 
                         </v-flex>
                     </v-layout>                     
-
+           </v-form>      
         </v-card-text>
 
         <v-divider></v-divider>
@@ -133,8 +135,12 @@
 
   export default {
 
+
     data () {
       return {
+        notnullRule: [(v) => !!v || "Campo requerido"],
+
+
         checkbox:false,
         dialog: true,
         menu1: false,
@@ -242,19 +248,22 @@
 
 
         saveCarrier(){
-            var transport={
-                transport_date: this.move_date,
-                carriername: this.carrier_selected.name,
-                carrier_id: this.carrier_selected.id,
-                vehicleplate: this.vehicle_selected.plate,
-                vehicle_id: this.vehicle_selected.id,
+
+           if (this.$refs.form.validate()){
+                var transport={
+                    transport_date: this.move_date,
+                    carriername: this.carrier_selected.name,
+                    carrier_id: this.carrier_selected.id,
+                    vehicleplate: this.vehicle_selected.plate,
+                    vehicle_id: this.vehicle_selected.id,
+                }
+
+                this.$store.commit('changeCarrier', transport);
+
+                this.dialog = false;
+
+                EventBus.$emit('saveCarrier', 'someValue'); 
             }
-
-            this.$store.commit('changeCarrier', transport);
-
-            this.dialog = false;
-
-            EventBus.$emit('saveCarrier', 'someValue'); 
         }
 
       }

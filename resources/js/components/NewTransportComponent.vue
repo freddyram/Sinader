@@ -23,6 +23,7 @@
         </v-card-title>
 
         <v-card-text>
+            <v-form ref="form"  lazy-validation>
             <v-layout>
                 <v-flex  xs12 class="px-1">
                     <v-text-field ref="rut" v-model="rut" :rules='rutRule' @change='validateRut' label="Rut Empresa o Persona Natural"></v-text-field>
@@ -40,7 +41,7 @@
                     <v-text-field :rules='notnullRule' v-model="plate" label="Patente"></v-text-field>
                 </v-flex>
             </v-layout> 
-
+            </v-form>
         </v-card-text>
 
         <v-divider></v-divider>
@@ -113,26 +114,29 @@
             var digv    = tmp[1]; 
             var rut     = tmp[0];
 
-            var carrier = {    
-            rut: rut,  
-            dv: digv,  
-            name : this.name, 
-            plate: this.plate, 
-            establishment_id: this.$store.getters.establishment.id
+
+            if (this.$refs.form.validate()){
+                var carrier = {    
+                rut: rut,  
+                dv: digv,  
+                name : this.name, 
+                plate: this.plate, 
+                establishment_id: this.$store.getters.establishment.id
+                }
+
+                alert(JSON.stringify(carrier));
+
+                // axios.post('/api/carrier/savenotregistered', carrier)
+                //     .then(function (resp) {    
+                //         EventBus.$emit('saveTransport', 'someValue');
+                //     })
+                //     .catch(function (resp) {
+                //         console.log(resp);
+                //         alert(resp);
+                // });
+
+                this.dialog = false;
             }
-
-            alert(JSON.stringify(carrier));
-
-            axios.post('/api/carrier/savenotregistered', carrier)
-                .then(function (resp) {    
-                    EventBus.$emit('saveTransport', 'someValue');
-                })
-                .catch(function (resp) {
-                    console.log(resp);
-                    alert(resp);
-            });
-
-            this.dialog = false;
 
         }
     }

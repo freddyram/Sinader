@@ -45,6 +45,7 @@
                                 :rules = "generalRule"
                                 v-on:change="changeUnit"
                                 return-object
+                                readonly
                             ></v-select> 
 
                         </v-flex>
@@ -97,7 +98,7 @@
         checkbox:false,
         dialog: true,
 
-        unidad:'',
+        unidad:'Toneladas',
         cantidad:0,
         residue_name:'',
         comment:'',
