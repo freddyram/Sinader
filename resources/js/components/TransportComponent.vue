@@ -27,6 +27,7 @@
 
 
         <v-card-text>
+           <v-form ref="form"  lazy-validation>
                         <v-layout>
                         <v-flex xs12 class="px-1">
                             <v-col cols="12" lg="6">
@@ -46,6 +47,7 @@
                                       persistent-hint
                                       prepend-icon="event"
                                       readonly
+                                      :rules="notnullRule"
                                       v-on="on"
                                     ></v-text-field>
                                   </template>
@@ -60,29 +62,9 @@
                         <v-flex xs12 class="px-1">                         
                             <v-text-field color="main_green" box placeholder="Seleccionar" @click='toSearch' v-model="transport"  readonly label="Empresa Trasnporte"></v-text-field>
                         </v-flex>    
-<<<<<<< HEAD
+
                     </v-layout>
-=======
-         <!--                <v-flex xs2 class="px-1">
-                            <v-btn text icon color="grey lighten-2" @click='toSearch' >
-                                <v-icon>search</v-icon>
-                            </v-btn>
-                        </v-flex> -->
-                    </v-layout>
-<!--                     <v-layout>
-                        <v-flex xs12 class="px-1">
-                            <v-select
-                                :items="vehicle_types"
-                                v-model="type"
-                                label="Tipo de Vehículo"
-                                item-text="name"  
-                                :rules = "generalRule"
-                                v-on:change="changeVehicleType"
-                                return-object
-                            ></v-select> 
-                        </v-flex>
-                    </v-layout> -->
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
+
                     <v-layout>
                         <v-flex xs12 class="px-1">
                             <v-select
@@ -90,7 +72,7 @@
                                 v-model="vehicle"
                                 label="Patente"
                                 item-text="plate"  
-                                :rules = "generalRule"
+                                :rules = "notnullRule"
                                 v-on:change="changeVehicle"
                                 return-object
                             ></v-select> 
@@ -118,7 +100,7 @@
                             ></v-select> 
                         </v-flex>
                     </v-layout>                     
-
+           </v-form>      
         </v-card-text>
 
         <v-divider></v-divider>
@@ -155,27 +137,24 @@
 
   export default {
 
+
     data () {
       return {
+        notnullRule: [(v) => !!v || "Campo requerido"],
+
+
         checkbox:false,
         dialog: true,
         menu1: false,
 
         carrier:'',
-<<<<<<< HEAD
-=======
-        vehicle_type:'',
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
         vahicle:'',
         trasnport:'',
 
         texto: 'Atención: Si el transporte no se encuentra en el listado, incorporelo a su declaración. Este listado será informado a los servicios fiscalizadores',
 
         carriers: [],
-<<<<<<< HEAD
-=======
-        vehicle_types: [],
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
+
         vehicles: [],    
 
         }
@@ -187,13 +166,12 @@
         EventBus.$once('selectCarrier', function(){  
             app.refreshCarrier();
         });
-<<<<<<< HEAD
+
         EventBus.$once('saveTransport', function(){  
             app.refreshCarrierNotReg();
         });
 
-=======
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
+
     },
     methods:{
         initialize(){
@@ -207,7 +185,7 @@
             //         alert("Error carrier :" + resp);
             //     });
 
-<<<<<<< HEAD
+
             // axios.get('/api/vehicletype')
             //     .then(function (resp) {    
             //         app.vehicle_types = resp.data;
@@ -218,7 +196,7 @@
         },
 
         refreshCarrier(){
-=======
+
             axios.get('/api/vehicletype')
                 .then(function (resp) {    
                     app.vehicle_types = resp.data;
@@ -230,19 +208,17 @@
 
         refreshCarrier(){
             
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
+
             this.transport = this.$store.getters.carrier.name;
             this.changeCarrier(this.$store.getters.carrier);
         },
 
-<<<<<<< HEAD
+
         refreshCarrierNotReg(){
 
 
         },
 
-=======
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
         changeCarrier(carrier_selected){
           this.carrier_selected = carrier_selected;
             var app = this;
@@ -258,11 +234,7 @@
 
         },
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
         changeVehicle(vehicle_selected){
             this.vehicle_selected = vehicle_selected;
         },
@@ -292,25 +264,23 @@
             this.menu1 = false;            
         },
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
         saveCarrier(){
-            var transport={
-                transport_date: this.move_date,
-                carriername: this.carrier_selected.name,
-                carrier_id: this.carrier_selected.id,
-                vehicleplate: this.vehicle_selected.plate,
-                vehicle_id: this.vehicle_selected.id,
+
+           if (this.$refs.form.validate()){
+                var transport={
+                    transport_date: this.move_date,
+                    carriername: this.carrier_selected.name,
+                    carrier_id: this.carrier_selected.id,
+                    vehicleplate: this.vehicle_selected.plate,
+                    vehicle_id: this.vehicle_selected.id,
+                }
+
+                this.$store.commit('changeCarrier', transport);
+
+                this.dialog = false;
+
+                EventBus.$emit('saveCarrier', 'someValue'); 
             }
-
-            this.$store.commit('changeCarrier', transport);
-
-            this.dialog = false;
-
-            EventBus.$emit('saveCarrier', 'someValue'); 
         }
 
       }

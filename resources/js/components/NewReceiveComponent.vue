@@ -23,7 +23,7 @@
                             <v-text-field v-model="this.rut" label="Rut"></v-text-field>
                         </v-flex>
                         <v-flex xs2 class="px-1 py-2">
-                            <v-btn class="ma-2 white--text" color='main_green' @click='validateSii' >
+                            <v-btn  class="ma-2 white--text" color='main_green' @click='validateSii' >
                             Validar SII    
                             <v-icon>done</v-icon>
                             </v-btn>
@@ -247,19 +247,16 @@
 
 <script>
 
-
   import Vue from 'vue';  
   import Vuex from 'vuex'; 
   import { mapState } from 'vuex';  
   
   import { EventBus } from './../eventbus.js';
   import { EventBus2 } from './../eventbus2.js';
-
  
   import NewReceiveResidueComponent  from './../components/NewReceiveResidueComponent';
   import UploadComponent  from './../components/UploadComponent';
   
-
   export default {
     props: {
         declaration_edit: Object,
@@ -287,22 +284,17 @@
 
         generator:'',
 
-
         headers: [
             { text: 'Descripción del Residuo', value: '' },            
             { text: 'Cantidad(t)', value: '' },
             { text: 'Destinatario', value: '' },
             { text: 'Nombre Establecimiento', value: '' },
-
-
         ],
 
-       
         residues: [
         ],
 
         declaration:  {},
-        
       }
     },
     
@@ -319,20 +311,17 @@
 
     methods: {
         initialize(){
-           //this.$store.commit('changeIndexedit', -1);
-            
+           //this.$store.commit('changeIndexedit', -1);            
             var app = this;
 
-
             if(this.declaration_edit){
-
+               
                 app.declaration = app.declaration_edit;
                 app.correlative = app.declaration_edit.correlative + '-' + app.declaration_edit.correlative_dv;  
                 app.company     = app.declaration_edit.company;
                 app.address     = app.declaration_edit.direccion;
                 app.commune     = app.declaration_edit.comuna;
                 app.region      = app.declaration_edit.region;
-
 
                 axios.get('/api/waste_details/'+app.declaration_edit.id)
                     .then(function (resp) {    
@@ -341,8 +330,6 @@
                     .catch(function (resp) {
                         console.log(resp);
                     }); 
-
-
             } else {
                 axios.post('/api/declaration/create')
                     .then(function (resp) {    

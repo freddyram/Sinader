@@ -51,7 +51,7 @@
       	<v-toolbar-title>Recepción de Residuos no Peligrosos Generadores No Registrados</v-toolbar-title>
 
  	    <v-spacer></v-spacer>
-        <v-btn @click='toNewReceive' color="main_green">Nueva Recepción</v-btn>
+        <v-btn @click='toNNReceive' color="main_green">Nueva Recepción</v-btn>
     </v-toolbar>
 
 
@@ -71,11 +71,7 @@
 
 
         <td> 
-<<<<<<< HEAD
-            <v-btn  v-if="props.item.status=='CREADA'" small @click="toNewReceive(props.item)" color="main_green" dark>Editar</v-btn>
-=======
-            <v-btn  v-if="props.item.status=='CREADA'" small @click="toReceive(props.item)" color="main_green" dark>Editar</v-btn>
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
+            <v-btn  v-if="props.item.status=='CREADA'" small @click="toNNReceive(props.item)" color="main_green" dark>Editar</v-btn>
         </td>   
       </template>
     </v-data-table>
@@ -163,11 +159,8 @@
 
 
         toReceive ($declaration){
-<<<<<<< HEAD
-            var ComponentReserv = Vue.extend(DeclarationComponent)
-=======
+
             var ComponentReserv = Vue.extend(NewReceiveComponent)
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
             var instance = new ComponentReserv({store: this.$store, propsData: {
             declaration_edit: $declaration,
              
@@ -177,10 +170,10 @@
         },
 
 
-        toNewReceive (){
+        toNNReceive ($declaration){
             var ComponentReserv = Vue.extend(NewReceiveComponent)
             var instance = new ComponentReserv({store: this.$store, propsData: {
-             
+            declaration_edit: $declaration, 
           }});
             instance.$mount();
             this.$refs.container.replaceChild(instance.$el);

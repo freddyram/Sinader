@@ -8,10 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\ActiveLine' => $baseDir . '/app/ActiveLine.php',
     'App\\Carrier' => $baseDir . '/app/carrier.php',
-<<<<<<< HEAD
     'App\\CarrierNotRegistered' => $baseDir . '/app/CarrierNotRegistered.php',
-=======
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
     'App\\Commune' => $baseDir . '/app/Commune.php',
     'App\\Company' => $baseDir . '/app/Company.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
