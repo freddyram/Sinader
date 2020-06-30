@@ -91,11 +91,11 @@
                         </v-flex>
 
                         <v-flex xs3 class="px-1">
-                            <v-text-field v-model="empresa" label="Empresa"></v-text-field>
+                            <v-text-field v-model="empresa"  :rules='lengthRule' label="Empresa"></v-text-field>
                         </v-flex>
 
                         <v-flex xs3 class="px-1">
-                            <v-text-field v-model="contacto" label="Contacto"></v-text-field>
+                            <v-text-field v-model="contacto" :rules='lengthRule' label="Contacto"></v-text-field>
                         </v-flex>
 
                         <v-flex xs3 class="px-1">
@@ -222,6 +222,7 @@
 
         generalRule: [v => !!v || 'Campo requerido'],
         numberRule: [v => v && /^\d+(\.\d+)?$/.test(v) || 'Debe ser numérico',, (v) => v<=9999 || 'Valor excede el máximo'],
+        lengthRule: [v => !!v || 'Campo requerido', (v) => v.length<=60 || 'Largo del texto excede el máximo'],
         emailRule: [(v) => !!v || "Campo requerido", (v) => /.+@.+\..+/.test(v) || "El E-mail debe ser valido"],
 
         receiver_name:'',

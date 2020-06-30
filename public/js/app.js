@@ -3906,6 +3906,11 @@ __webpack_require__.r(__webpack_exports__);
       generalRule: [function (v) {
         return !!v || 'Campo requerido';
       }],
+      lengthRule: [function (v) {
+        return !!v || 'Campo requerido';
+      }, function (v) {
+        return v.length <= 10 || 'Largo del texto excede el máximo';
+      }],
       numberRule: [function (v) {
         return v && /^\d+(\.\d+)?$/.test(v) || 'Debe ser numérico';
       }, function (v) {
@@ -4513,6 +4518,11 @@ __webpack_require__.r(__webpack_exports__);
         return v && /^\d+(\.\d+)?$/.test(v) || 'Debe ser numérico';
       },, function (v) {
         return v <= 9999 || 'Valor excede el máximo';
+      }],
+      lengthRule: [function (v) {
+        return !!v || 'Campo requerido';
+      }, function (v) {
+        return v.length <= 60 || 'Largo del texto excede el máximo';
       }],
       emailRule: [function (v) {
         return !!v || "Campo requerido";
@@ -13872,7 +13882,10 @@ var render = function() {
                                 { staticClass: "px-1", attrs: { xs3: "" } },
                                 [
                                   _c("v-text-field", {
-                                    attrs: { label: "Empresa" },
+                                    attrs: {
+                                      rules: _vm.lengthRule,
+                                      label: "Empresa"
+                                    },
                                     model: {
                                       value: _vm.empresa,
                                       callback: function($$v) {
@@ -13890,7 +13903,10 @@ var render = function() {
                                 { staticClass: "px-1", attrs: { xs3: "" } },
                                 [
                                   _c("v-text-field", {
-                                    attrs: { label: "Contacto" },
+                                    attrs: {
+                                      rules: _vm.lengthRule,
+                                      label: "Contacto"
+                                    },
                                     model: {
                                       value: _vm.contacto,
                                       callback: function($$v) {
@@ -14428,7 +14444,10 @@ var render = function() {
                                 { staticClass: "px-1", attrs: { xs3: "" } },
                                 [
                                   _c("v-text-field", {
-                                    attrs: { label: "Empresa" },
+                                    attrs: {
+                                      rules: _vm.lengthRule,
+                                      label: "Empresa"
+                                    },
                                     model: {
                                       value: _vm.empresa,
                                       callback: function($$v) {
@@ -14446,7 +14465,10 @@ var render = function() {
                                 { staticClass: "px-1", attrs: { xs3: "" } },
                                 [
                                   _c("v-text-field", {
-                                    attrs: { label: "Contacto" },
+                                    attrs: {
+                                      rules: _vm.lengthRule,
+                                      label: "Contacto"
+                                    },
                                     model: {
                                       value: _vm.contacto,
                                       callback: function($$v) {
