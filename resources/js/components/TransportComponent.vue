@@ -251,7 +251,6 @@
         },
 
         toSearch(){
-                alert('SearchTransportComponent');
                 var ComponentReserv = Vue.extend(SearchTransportComponent)
                 var instance = new ComponentReserv({store: this.$store, propsData: {
                 }});

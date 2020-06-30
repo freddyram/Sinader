@@ -6396,7 +6396,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     instance.$mount();
     this.$refs.container.replaceChild(instance.$el);
   }), _defineProperty(_methods, "toSearch", function toSearch() {
-    alert('SearchTransportComponent');
     var ComponentReserv = vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend(_components_SearchTransportComponent__WEBPACK_IMPORTED_MODULE_4__["default"]);
     var instance = new ComponentReserv({
       store: this.$store,
