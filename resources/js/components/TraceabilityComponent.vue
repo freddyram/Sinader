@@ -164,7 +164,7 @@
     created(){
         var app = this;
         this.initialize();
-        EventBus.$once('saveResidues', function(){  
+        EventBus.$on('saveResidues', function(){  
             //alert('residues');
             app.refreshList();
         });
@@ -175,7 +175,7 @@
         initialize(){
             var app = this;
 
-            //alert(JSON.stringify(this.waste_detail));
+            
             this.residue= this.waste_detail.waste;
 
             if(this.waste_detail.discrep_quantity>0){
@@ -220,6 +220,7 @@
 
         saveAll(){
             alert("Se generarán declaraciones de salida a cada destinatario de la trazabilidad");
+
             var params ={
                 declaration_origin: this.declaration_origin,
                 waste_detail: this.residues,

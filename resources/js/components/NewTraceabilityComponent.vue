@@ -211,6 +211,8 @@
     methods: {
         initialize(){
 
+            alert(JSON.stringify(this.waste_detail));
+
             this.residue  = this.waste_detail.waste;
             this.cantidad = this.waste_detail.quantity;
 
@@ -335,6 +337,8 @@
 
             if (this.$refs.form.validate()){
 
+
+
                 this.residue = {
                     waste: this.waste_detail.waste,
                     sum: this.cantidad + ' ' + this.unit_selected.name,
@@ -346,6 +350,20 @@
                     empresa: this.empresa,
                     contacto: this.contacto,
                     email: this.email,
+
+                    chapter: this.waste_detail.chapter,
+                    subchapter: this.waste_detail.subchapter,
+
+                    waste_id: this.waste_detail.waste_id,
+                    chapter_id: this.waste_detail.subchapter_id,
+                    subchapter_id: this.waste_detail.subchapter_id,
+
+                    carrier_name:null,
+                    carrier_id: null,
+                    carrier_name: null,
+                    trasnport_date: null,
+                    plate_id: null,
+                    plate: null,
 
                     company_id: this.company_selected.id,
                     establishment_id: this.establishment_selected.id,

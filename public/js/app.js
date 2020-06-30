@@ -5095,6 +5095,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: (_methods = {
     initialize: function initialize() {
+      alert(JSON.stringify(this.waste_detail));
       this.residue = this.waste_detail.waste;
       this.cantidad = this.waste_detail.quantity;
       var app = this;
@@ -5182,7 +5183,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$refs.container.replaceChild(instance.$el);
   }), _defineProperty(_methods, "saveResidue", function saveResidue() {
     if (this.$refs.form.validate()) {
-      this.residue = {
+      var _this$residue;
+
+      this.residue = (_this$residue = {
         waste: this.waste_detail.waste,
         sum: this.cantidad + ' ' + this.unit_selected.name,
         company: this.company_selected.rut + ' | ' + this.company_selected.name,
@@ -5193,16 +5196,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         empresa: this.empresa,
         contacto: this.contacto,
         email: this.email,
-        company_id: this.company_selected.id,
-        establishment_id: this.establishment_selected.id,
-        process_id: this.process_selected.id,
-        manage_id: this.gestion_selected.id,
-        quantity: this.cantidad,
-        waste_id: this.waste_detail.id,
-        unit_id: this.unit_selected.id,
-        carrier_id: 0,
-        carrier: ''
-      };
+        chapter: this.waste_detail.chapter,
+        subchapter: this.waste_detail.subchapter,
+        waste_id: this.waste_detail.waste_id,
+        chapter_id: this.waste_detail.subchapter_id,
+        subchapter_id: this.waste_detail.subchapter_id,
+        carrier_name: null,
+        carrier_id: null
+      }, _defineProperty(_this$residue, "carrier_name", null), _defineProperty(_this$residue, "trasnport_date", null), _defineProperty(_this$residue, "plate_id", null), _defineProperty(_this$residue, "plate", null), _defineProperty(_this$residue, "company_id", this.company_selected.id), _defineProperty(_this$residue, "establishment_id", this.establishment_selected.id), _defineProperty(_this$residue, "process_id", this.process_selected.id), _defineProperty(_this$residue, "manage_id", this.gestion_selected.id), _defineProperty(_this$residue, "quantity", this.cantidad), _defineProperty(_this$residue, "waste_id", this.waste_detail.id), _defineProperty(_this$residue, "unit_id", this.unit_selected.id), _defineProperty(_this$residue, "carrier_id", 0), _defineProperty(_this$residue, "carrier", ''), _this$residue);
       this.$store.commit('changeResidue', this.residue);
       this.dialog = false;
       _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$emit('saveResidues', 'someValue');
@@ -6105,15 +6106,14 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var app = this;
     this.initialize();
-    _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$once('saveResidues', function () {
+    _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$on('saveResidues', function () {
       //alert('residues');
       app.refreshList();
     });
   },
   methods: {
     initialize: function initialize() {
-      var app = this; //alert(JSON.stringify(this.waste_detail));
-
+      var app = this;
       this.residue = this.waste_detail.waste;
 
       if (this.waste_detail.discrep_quantity > 0) {
@@ -64076,15 +64076,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************************!*\
   !*** ./resources/js/components/TransportComponent.vue ***!
   \********************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TransportComponent_vue_vue_type_template_id_ca05b902___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TransportComponent.vue?vue&type=template&id=ca05b902& */ "./resources/js/components/TransportComponent.vue?vue&type=template&id=ca05b902&");
 /* harmony import */ var _TransportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TransportComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/TransportComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _TransportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _TransportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -64114,7 +64113,7 @@ component.options.__file = "resources/js/components/TransportComponent.vue"
 /*!*********************************************************************************!*\
   !*** ./resources/js/components/TransportComponent.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

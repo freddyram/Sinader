@@ -232,6 +232,9 @@ class DeclarationController extends Controller
         $declaration_origin = $request->input('declaration_origin');
         $waste_detail       = $request->input('waste_detail');
 
+        Info('********* savetraceability ************');
+        Info($waste_detail);
+        Info('*********************');
 
         $user = Auth::user();
 
@@ -267,12 +270,11 @@ class DeclarationController extends Controller
         $declaration->establishment_id  = $user_establishment->establishment_id;
         $declaration->user_id           = $user->id;
 
+
         if ($declaration->save() ){
             WasteDetail::where('declaration_id', $declaration->id)->delete();
             $this->storeDetail($waste_detail, $declaration->id, $declaration_origin['id']);
         }
-
-
     }
 
     /**
