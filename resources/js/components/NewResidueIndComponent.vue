@@ -221,7 +221,7 @@
       return {
 
         generalRule: [v => !!v || 'Campo requerido'], 
-        lengthRule: [v => !!v || 'Campo requerido', (v) => v.length<=10 || 'Largo del texto excede el máximo'], 
+        lengthRule: [v => !!v || 'Campo requerido', (v) => v.length<=60 || 'Largo del texto excede el máximo'], 
 
         numberRule: [v => v && /^\d+(\.\d+)?$/.test(v) || 'Debe ser numérico', (v) => v<=9999 || 'Valor excede el máximo'],
         emailRule: [(v) => !!v || "Campo requerido", (v) => /.+@.+\..+/.test(v) || "El E-mail debe ser valido"],

@@ -3909,7 +3909,7 @@ __webpack_require__.r(__webpack_exports__);
       lengthRule: [function (v) {
         return !!v || 'Campo requerido';
       }, function (v) {
-        return v.length <= 10 || 'Largo del texto excede el máximo';
+        return v.length <= 60 || 'Largo del texto excede el máximo';
       }],
       numberRule: [function (v) {
         return v && /^\d+(\.\d+)?$/.test(v) || 'Debe ser numérico';
