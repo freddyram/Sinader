@@ -204,7 +204,7 @@
                     <v-icon>edit</v-icon>
                 </v-btn>
 
-                <v-btn  icon @click="delete_item(props.item)" >
+                <v-btn  icon @click="delete_item(props.index)" >
                     <v-icon>delete</v-icon>
                 </v-btn>
             </td>   
@@ -449,9 +449,9 @@
 
  
 
-        delete_item(item){
+        delete_item(index){
 
-            this.residues.pop(item);
+            this.residues.splice(index,1);
         },  
 
         toUpload(){

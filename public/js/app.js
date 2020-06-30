@@ -2512,8 +2512,9 @@ __webpack_require__.r(__webpack_exports__);
 
       ;
     },
-    delete_item: function delete_item(item) {
-      this.residues.pop(item);
+    delete_item: function delete_item(index) {
+      // this.residues.pop(item);
+      this.residues.splice(index, 1);
     },
     toUpload: function toUpload() {
       var ComponentReserv = vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend(_components_UploadComponent__WEBPACK_IMPORTED_MODULE_6__["default"]);
@@ -3114,8 +3115,8 @@ __webpack_require__.r(__webpack_exports__);
         this.$store.commit('changeIndexedit', -1);
       }
     },
-    delete_item: function delete_item(item) {
-      this.residues.pop(item);
+    delete_item: function delete_item(index) {
+      this.residues.splice(index, 1);
     },
     toUpload: function toUpload() {
       var ComponentReserv = vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend(_components_UploadComponent__WEBPACK_IMPORTED_MODULE_5__["default"]);
@@ -3907,6 +3908,8 @@ __webpack_require__.r(__webpack_exports__);
       }],
       numberRule: [function (v) {
         return v && /^\d+(\.\d+)?$/.test(v) || 'Debe ser numérico';
+      }, function (v) {
+        return v <= 9999 || 'Valor excede el máximo';
       }],
       emailRule: [function (v) {
         return !!v || "Campo requerido";
@@ -3914,6 +3917,8 @@ __webpack_require__.r(__webpack_exports__);
         return /.+@.+\..+/.test(v) || "El E-mail debe ser valido";
       }],
       receiver_name: '',
+      maxValue: 9999,
+      minValue: 1,
       checkbox: false,
       dialog: true,
       cantidad: '',
@@ -4506,6 +4511,8 @@ __webpack_require__.r(__webpack_exports__);
       }],
       numberRule: [function (v) {
         return v && /^\d+(\.\d+)?$/.test(v) || 'Debe ser numérico';
+      },, function (v) {
+        return v <= 9999 || 'Valor excede el máximo';
       }],
       emailRule: [function (v) {
         return !!v || "Campo requerido";
@@ -5901,6 +5908,7 @@ __webpack_require__.r(__webpack_exports__);
     initialize: function initialize() {
       var app = this;
       axios.get('/api/carriers').then(function (resp) {
+        JSON.stringify(resp.data);
         app.carriers = resp.data;
       })["catch"](function (resp) {
         console.log(resp);
@@ -6316,6 +6324,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       notnullRule: [function (v) {
         return !!v || "Campo requerido";
       }],
+      minDate: new Date('2020-01-01T00:00:00').toISOString().slice(0, 10),
+      maxDate: new Date('2020-12-31T23:59:59').toISOString().slice(0, 10),
       checkbox: false,
       dialog: true,
       menu1: false,
@@ -6386,12 +6396,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     instance.$mount();
     this.$refs.container.replaceChild(instance.$el);
   }), _defineProperty(_methods, "toSearch", function toSearch() {
+    alert('SearchTransportComponent');
     var ComponentReserv = vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend(_components_SearchTransportComponent__WEBPACK_IMPORTED_MODULE_4__["default"]);
     var instance = new ComponentReserv({
       store: this.$store,
-      propsData: {
-        source: ''
-      }
+      propsData: {}
     });
     instance.$mount();
     this.$refs.container.replaceChild(instance.$el);
@@ -6409,6 +6418,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$store.commit('changeCarrier', transport);
       this.dialog = false;
       _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$emit('saveCarrier', 'someValue');
+      º;
     }
   }), _methods)
 });
@@ -9346,12 +9356,12 @@ __webpack_require__.r(__webpack_exports__);
       instance.$mount();
       this.$refs.container.replaceChild(instance.$el);
     },
-    toNNReceive: function toNNReceive($declaration) {
+    toNNReceive: function toNNReceive(declaration) {
       var ComponentReserv = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_NewReceiveComponent__WEBPACK_IMPORTED_MODULE_5__["default"]);
       var instance = new ComponentReserv({
         store: this.$store,
         propsData: {
-          declaration_edit: $declaration
+          declaration_edit: declaration
         }
       });
       instance.$mount();
@@ -12154,7 +12164,7 @@ var render = function() {
                                       attrs: { icon: "" },
                                       on: {
                                         click: function($event) {
-                                          return _vm.delete_item(props.item)
+                                          return _vm.delete_item(props.index)
                                         }
                                       }
                                     },
@@ -12170,7 +12180,7 @@ var render = function() {
                       ],
                       null,
                       false,
-                      265068723
+                      2688618328
                     )
                   })
                 : _vm._e(),
@@ -13130,7 +13140,7 @@ var render = function() {
                                       attrs: { icon: "" },
                                       on: {
                                         click: function($event) {
-                                          return _vm.delete_item(props.item)
+                                          return _vm.delete_item(props.index)
                                         }
                                       }
                                     },
@@ -13146,7 +13156,7 @@ var render = function() {
                       ],
                       null,
                       false,
-                      2683351701
+                      2594260126
                     )
                   })
                 : _vm._e(),
@@ -16613,7 +16623,11 @@ var render = function() {
                                     [
                                       _vm._v(" "),
                                       _c("v-date-picker", {
-                                        attrs: { "no-title": "" },
+                                        attrs: {
+                                          min: _vm.minDate,
+                                          max: _vm.maxDate,
+                                          "no-title": ""
+                                        },
                                         on: { input: _vm.val_move_date },
                                         model: {
                                           value: _vm.move_date,
@@ -20082,7 +20096,7 @@ var render = function() {
                             _c(
                               "td",
                               [
-                                props.item.status == "CREADA"
+                                props.item.status == "ENVIADA"
                                   ? _c(
                                       "v-btn",
                                       {
@@ -20148,7 +20162,11 @@ var render = function() {
                         "v-btn",
                         {
                           attrs: { color: "main_green" },
-                          on: { click: _vm.toNNReceive }
+                          on: {
+                            click: function($event) {
+                              return _vm.toNNReceive(false)
+                            }
+                          }
                         },
                         [_vm._v("Nueva Recepción")]
                       )
@@ -20191,24 +20209,22 @@ var render = function() {
                             _c(
                               "td",
                               [
-                                props.item.status == "CREADA"
-                                  ? _c(
-                                      "v-btn",
-                                      {
-                                        attrs: {
-                                          small: "",
-                                          color: "main_green",
-                                          dark: ""
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.toNNReceive(props.item)
-                                          }
-                                        }
-                                      },
-                                      [_vm._v("Editar")]
-                                    )
-                                  : _vm._e()
+                                _c(
+                                  "v-btn",
+                                  {
+                                    attrs: {
+                                      small: "",
+                                      color: "main_green",
+                                      dark: ""
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.toNNReceive(props.item)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Editar")]
+                                )
                               ],
                               1
                             )
@@ -63647,15 +63663,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************************!*\
   !*** ./resources/js/components/NewTraceabilityComponent.vue ***!
   \**************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NewTraceabilityComponent_vue_vue_type_template_id_7dda7be3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NewTraceabilityComponent.vue?vue&type=template&id=7dda7be3& */ "./resources/js/components/NewTraceabilityComponent.vue?vue&type=template&id=7dda7be3&");
 /* harmony import */ var _NewTraceabilityComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewTraceabilityComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/NewTraceabilityComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _NewTraceabilityComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _NewTraceabilityComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -63685,7 +63700,7 @@ component.options.__file = "resources/js/components/NewTraceabilityComponent.vue
 /*!***************************************************************************************!*\
   !*** ./resources/js/components/NewTraceabilityComponent.vue?vue&type=script&lang=js& ***!
   \***************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63717,15 +63732,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************************************!*\
   !*** ./resources/js/components/NewTransportComponent.vue ***!
   \***********************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NewTransportComponent_vue_vue_type_template_id_df7d538e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NewTransportComponent.vue?vue&type=template&id=df7d538e& */ "./resources/js/components/NewTransportComponent.vue?vue&type=template&id=df7d538e&");
 /* harmony import */ var _NewTransportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewTransportComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/NewTransportComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _NewTransportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _NewTransportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -63755,7 +63769,7 @@ component.options.__file = "resources/js/components/NewTransportComponent.vue"
 /*!************************************************************************************!*\
   !*** ./resources/js/components/NewTransportComponent.vue?vue&type=script&lang=js& ***!
   \************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64063,14 +64077,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************************!*\
   !*** ./resources/js/components/TransportComponent.vue ***!
   \********************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TransportComponent_vue_vue_type_template_id_ca05b902___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TransportComponent.vue?vue&type=template&id=ca05b902& */ "./resources/js/components/TransportComponent.vue?vue&type=template&id=ca05b902&");
 /* harmony import */ var _TransportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TransportComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/TransportComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _TransportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _TransportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -64100,7 +64115,7 @@ component.options.__file = "resources/js/components/TransportComponent.vue"
 /*!*********************************************************************************!*\
   !*** ./resources/js/components/TransportComponent.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

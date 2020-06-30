@@ -221,7 +221,7 @@
       return {
 
         generalRule: [v => !!v || 'Campo requerido'],
-        numberRule: [v => v && /^\d+(\.\d+)?$/.test(v) || 'Debe ser numérico'],
+        numberRule: [v => v && /^\d+(\.\d+)?$/.test(v) || 'Debe ser numérico',, (v) => v<=9999 || 'Valor excede el máximo'],
         emailRule: [(v) => !!v || "Campo requerido", (v) => /.+@.+\..+/.test(v) || "El E-mail debe ser valido"],
 
         receiver_name:'',

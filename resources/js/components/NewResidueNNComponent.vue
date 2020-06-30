@@ -59,7 +59,7 @@
                     </v-layout>
                     <v-layout>
                         <v-flex xs3 class="px-1">
-                            <v-text-field type='number' label="Cantidad"></v-text-field>
+                            <v-text-field :rules="numberRule" type='number' label="Cantidad"></v-text-field>
                         </v-flex>
 
                         <v-flex xs3 class="px-1">
@@ -99,6 +99,10 @@
   export default {
     data () {
       return {
+
+        generalRule: [v => !!v || 'Campo requerido'],
+        numberRule: [v => v && /^\d+(\.\d+)?$/.test(v) || 'Debe ser numérico',, (v) => v<=9999 || 'Valor excede el máximo'],
+
         checkbox:false,
         dialog: true,
 

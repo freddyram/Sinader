@@ -130,7 +130,8 @@
         initialize(){
             var app = this;
             axios.get('/api/carriers')
-                .then(function (resp) {    
+                .then(function (resp) {   
+                    JSON.stringify(resp.data); 
                     app.carriers = resp.data;
                 })
                 .catch(function (resp) {

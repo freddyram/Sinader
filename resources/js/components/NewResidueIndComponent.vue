@@ -152,7 +152,7 @@
 
                     <v-layout>
                         <v-flex xs3 class="px-1">
-                            <v-text-field placeholder='999,99' :rules = "numberRule" v-model='cantidad' type='number' label="Cantidad"></v-text-field>
+                            <v-text-field placeholder='999,99'  :rules = "numberRule" v-model='cantidad' type='number' label="Cantidad"></v-text-field>
                         </v-flex>
 
                         <v-flex xs3 class="px-1">
@@ -221,10 +221,12 @@
       return {
 
         generalRule: [v => !!v || 'Campo requerido'],
-        numberRule: [v => v && /^\d+(\.\d+)?$/.test(v) || 'Debe ser numérico'],
+        numberRule: [v => v && /^\d+(\.\d+)?$/.test(v) || 'Debe ser numérico', (v) => v<=9999 || 'Valor excede el máximo'],
         emailRule: [(v) => !!v || "Campo requerido", (v) => /.+@.+\..+/.test(v) || "El E-mail debe ser valido"],
 
         receiver_name:'',
+        maxValue: 9999,
+        minValue: 1,
 
         checkbox:false,
         dialog: true,

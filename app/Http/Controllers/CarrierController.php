@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Carrier;
-<<<<<<< HEAD
 use App\Vehicle;
 use App\CarrierNotRegistered;
 use App\UserEstablishment;
@@ -14,24 +13,12 @@ use Illuminate\Http\Request;
 class CarrierController extends Controller
 {
 	public function data(Request $request){
-		$carriers = Carrier::orderBy('name')->where('registered',null)->get();
-=======
-use Illuminate\Http\Request;
-
-class CarrierController extends Controller
-{
-	public function data(Request $request){
 		$carriers = Carrier::orderBy('name')->get();
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
 		return response()->json($carriers);
 	}
 
 	public function forid($id){
-<<<<<<< HEAD
 		$carrier = Carrier::where('id', $id)->where('registered',null)->get()->first();
-=======
-		$carrier = Carrier::where('id', $id)->get()->first();
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
 		return response()->json($carrier);
 	}
 
@@ -40,7 +27,6 @@ class CarrierController extends Controller
 		$rut = $request->input('rut');
 		$name = $request->input('name');
 
-<<<<<<< HEAD
 		$carriers = Carrier::where('registered',null)->orderBy('name')->get();
 
 		if($name){
@@ -49,16 +35,7 @@ class CarrierController extends Controller
         if($rut){
         	$rut = substr ($rut, 0, -2);
 			$carriers = Carrier::where('rut', $rut)->where('registered',null)->get()->toArray();        	
-=======
-		$carriers = Carrier::orderBy('name')->get();
 
-		if($name){
-        	$carriers = Carrier::where('name', 'ILIKE', '%'.$name.'%')->get()->toArray();
-    	}
-        if($rut){
-        	$rut = substr ($rut, 0, -2);
-			$carriers = Carrier::where('rut', $rut)->get()->toArray();        	
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
         }
 
 		return response()->json($carriers);
@@ -66,11 +43,8 @@ class CarrierController extends Controller
 
 
 	public function index(Request $request){
-<<<<<<< HEAD
+
 		$carrier = carrier::where('registered',null)->get();
-=======
-		$carrier = carrier::all();
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
 		return response()->json($carrier);
 	}
 
@@ -106,11 +80,6 @@ class CarrierController extends Controller
         
    	}
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
    	public function delete($id)
     {
         Info($id);
@@ -121,7 +90,7 @@ class CarrierController extends Controller
     }
 
 
-<<<<<<< HEAD
+
     public function notRegistered (){
         $carriers = Carrier::where('registered','!=',null)->orderBy('name')->get();
 
@@ -162,7 +131,6 @@ class CarrierController extends Controller
         return response()->json($carrierNew);
 
     }
-=======
->>>>>>> b11d4baebf0e8748441f1508f794d5e39d48eea0
+
 
 }

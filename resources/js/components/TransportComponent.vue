@@ -51,7 +51,7 @@
                                       v-on="on"
                                     ></v-text-field>
                                   </template>
-                                  <v-date-picker v-model="move_date" no-title @input="val_move_date"></v-date-picker>
+                                  <v-date-picker v-model="move_date" :min="minDate" :max="maxDate" no-title @input="val_move_date"></v-date-picker>
                                 </v-menu>
                             </v-col>
 
@@ -142,7 +142,8 @@
       return {
         notnullRule: [(v) => !!v || "Campo requerido"],
 
-
+        minDate: new Date('2020-01-01T00:00:00').toISOString().slice(0,10),
+        maxDate: new Date('2020-12-31T23:59:59').toISOString().slice(0,10),
         checkbox:false,
         dialog: true,
         menu1: false,
@@ -250,9 +251,9 @@
         },
 
         toSearch(){
+                alert('SearchTransportComponent');
                 var ComponentReserv = Vue.extend(SearchTransportComponent)
                 var instance = new ComponentReserv({store: this.$store, propsData: {
-                source: '', 
                 }});
                 instance.$mount();
                 this.$refs.container.replaceChild(instance.$el);
@@ -279,9 +280,11 @@
 
                 this.dialog = false;
 
-                EventBus.$emit('saveCarrier', 'someValue'); 
+                EventBus.$emit('saveCarrier', 'someValue'); º
             }
-        }
+        },
+
+
 
       }
     }
