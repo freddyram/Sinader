@@ -23,28 +23,34 @@
         </v-card-title>
 
         <v-card-text>
+
             <v-form ref="form"  lazy-validation>
             <v-layout>
                 <v-flex  xs12 class="px-1">
 
                     <v-text-field ref="rut" v-model="rut" :rules='rutRule' @change='validateRut' label="Rut Empresa o Persona Natural"></v-text-field>
+
                 </v-flex>
             </v-layout>    
                         
             <v-layout>
                 <v-flex  xs12 class="px-1">
 
+
                     <v-text-field :rules='notnullRule' v-model="name" label="Nombre Empresa o Persona Natural"></v-text-field>
+
 
                 </v-flex>
             </v-layout>   
 
             <v-layout>
                 <v-flex  xs12 class="px-1">
+
                     <v-text-field :rules='notnullRule' v-model="plate" label="Patente"></v-text-field>
                 </v-flex>
             </v-layout> 
             </v-form>
+
         </v-card-text>
 
         <v-divider></v-divider>
@@ -54,8 +60,10 @@
           <v-btn
             color="main_green"
             class='white--text'
+
             @click="save"
             >
+
             Guardar
           </v-btn>
         </v-card-actions>
@@ -70,13 +78,14 @@
   import { EventBus } from './../eventbus.js';
 
 
+
   export default {
     data () {
       return {
 
+
         notnullRule: [(v) => !!v || "Campo requerido"],
         rutRule: [(v) => !!v || "Campo requerido", (v) => /^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(v) || "Formato incorrecto"],
-
 
         checkbox:false,
         dialog: true,
@@ -93,6 +102,7 @@
     methods: {
         initialize(){
             alert('Validación SII, pendiente')
+
         },
 
         validateRut (rutCompleto) {
@@ -144,6 +154,7 @@
 
                 this.dialog = false;
             }
+
 
 
         }

@@ -103,6 +103,7 @@
         generalRule: [v => !!v || 'Campo requerido'],
         numberRule: [v => v && /^\d+(\.\d+)?$/.test(v) || 'Debe ser numérico',, (v) => v<=9999 || 'Valor excede el máximo'],
 
+
         checkbox:false,
         dialog: true,
 

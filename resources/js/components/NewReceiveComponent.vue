@@ -23,7 +23,9 @@
                             <v-text-field v-model="this.rut" label="Rut"></v-text-field>
                         </v-flex>
                         <v-flex xs2 class="px-1 py-2">
+
                             <v-btn  class="ma-2 white--text" color='main_green' @click='validateSii' >
+
                             Validar SII    
                             <v-icon>done</v-icon>
                             </v-btn>
@@ -204,7 +206,9 @@
                     <v-icon>edit</v-icon>
                 </v-btn>
 
+
                 <v-btn  icon @click="delete_item(props.index)" >
+
                     <v-icon>delete</v-icon>
                 </v-btn>
             </td>   
@@ -253,10 +257,12 @@
   
   import { EventBus } from './../eventbus.js';
   import { EventBus2 } from './../eventbus2.js';
+
  
   import NewReceiveResidueComponent  from './../components/NewReceiveResidueComponent';
   import UploadComponent  from './../components/UploadComponent';
   
+
   export default {
     props: {
         declaration_edit: Object,
@@ -284,17 +290,21 @@
 
         generator:'',
 
+
         headers: [
             { text: 'Descripción del Residuo', value: '' },            
             { text: 'Cantidad(t)', value: '' },
             { text: 'Destinatario', value: '' },
             { text: 'Nombre Establecimiento', value: '' },
+
         ],
+
 
         residues: [
         ],
 
         declaration:  {},
+
       }
     },
     
@@ -311,11 +321,12 @@
 
     methods: {
         initialize(){
-           //this.$store.commit('changeIndexedit', -1);            
+          
             var app = this;
 
             if(this.declaration_edit){
                
+
                 app.declaration = app.declaration_edit;
                 app.correlative = app.declaration_edit.correlative + '-' + app.declaration_edit.correlative_dv;  
                 app.company     = app.declaration_edit.company;
@@ -330,6 +341,7 @@
                     .catch(function (resp) {
                         console.log(resp);
                     }); 
+
             } else {
                 axios.post('/api/declaration/create')
                     .then(function (resp) {    
@@ -449,9 +461,11 @@
 
  
 
+
         delete_item(index){
 
             this.residues.splice(index,1);
+
         },  
 
         toUpload(){

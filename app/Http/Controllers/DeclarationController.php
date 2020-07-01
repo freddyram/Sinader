@@ -10,6 +10,8 @@ use App\WasteDetail;
 use App\Company;
 use App\MonthWaste;
 use App\ProcessType;
+use App\ManageType;
+
 use App\Carrier;
 use App\Vehicle;
 use App\LerWaste;
@@ -20,9 +22,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Imports\MonthWasteImport;
 use Excel;
 
+use App\Exports\MonthWasteExport;
+
+
 use \PDF;
 use \QrCode;
-
 
 class DeclarationController extends Controller
 {
@@ -94,6 +98,11 @@ class DeclarationController extends Controller
 
 
     public function declaration($declaration_id){
+        $declaration = Declaration::where('id', $declaration_id)->get()->first();
+        return response()->json($declaration);   
+    }
+
+    public function find($declaration_id){
         $declaration = Declaration::where('id', $declaration_id)->get()->first();
         return response()->json($declaration);   
     }
@@ -232,9 +241,6 @@ class DeclarationController extends Controller
         $declaration_origin = $request->input('declaration_origin');
         $waste_detail       = $request->input('waste_detail');
 
-        Info('********* savetraceability ************');
-        Info($waste_detail);
-        Info('*********************');
 
         $user = Auth::user();
 
@@ -275,6 +281,7 @@ class DeclarationController extends Controller
             WasteDetail::where('declaration_id', $declaration->id)->delete();
             $this->storeDetail($waste_detail, $declaration->id, $declaration_origin['id']);
         }
+
     }
 
     /**
@@ -493,6 +500,11 @@ class DeclarationController extends Controller
             $company = Company::where('rut', $rut_company)->first();
             $establishment = Establishment::where('retc_code', $waste['entablishment'])->first();
             $process = ProcessType::where('id', $waste['process'])->first();
+
+            $manage = ManageType::where('id', $waste['manage'])->first();
+
+
+
             $carrier = Carrier::where('rut', $rut_carrier )->first();
             $vehicle = Vehicle::where('plate', $waste['plate'])->first();
             $ler_waste = LerWaste::where('waste_code', $waste['ler'])->first();
@@ -564,6 +576,14 @@ class DeclarationController extends Controller
 
             $waste_detail[$ind]['plate']            = $waste['plate'];
 
+
+             if($manage){
+                $waste_detail[$ind]['manage_id']   = $manage->id;
+                $waste_detail[$ind]['gestion']   = $manage->name;
+            }else{
+                $errors[] = "Linea ".$line.": gestión no existe";
+            }
+
             $ind++;
 
         }
@@ -574,6 +594,13 @@ class DeclarationController extends Controller
             return response()->json($waste_detail);  
         }
 
+    }
+
+
+    public function export() 
+    {
+        Info('******** Export *********');
+        return Excel::download(new MonthWasteExport, 'plantilla.xlsx');
     }
 
 }

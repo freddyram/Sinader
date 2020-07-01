@@ -211,10 +211,10 @@
     methods: {
         initialize(){
 
-            alert(JSON.stringify(this.waste_detail));
 
             this.residue  = this.waste_detail.waste;
             this.cantidad = this.waste_detail.quantity;
+
 
             var app = this;
 
@@ -337,8 +337,6 @@
 
             if (this.$refs.form.validate()){
 
-
-
                 this.residue = {
                     waste: this.waste_detail.waste,
                     sum: this.cantidad + ' ' + this.unit_selected.name,
@@ -350,6 +348,7 @@
                     empresa: this.empresa,
                     contacto: this.contacto,
                     email: this.email,
+
 
                     chapter: this.waste_detail.chapter,
                     subchapter: this.waste_detail.subchapter,

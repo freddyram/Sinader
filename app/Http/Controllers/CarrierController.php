@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Carrier;
+
 use App\Vehicle;
 use App\CarrierNotRegistered;
 use App\UserEstablishment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+
 
 
 class CarrierController extends Controller
@@ -18,7 +20,9 @@ class CarrierController extends Controller
 	}
 
 	public function forid($id){
+
 		$carrier = Carrier::where('id', $id)->where('registered',null)->get()->first();
+
 		return response()->json($carrier);
 	}
 
@@ -26,6 +30,7 @@ class CarrierController extends Controller
 
 		$rut = $request->input('rut');
 		$name = $request->input('name');
+
 
 		$carriers = Carrier::where('registered',null)->orderBy('name')->get();
 
@@ -36,6 +41,7 @@ class CarrierController extends Controller
         	$rut = substr ($rut, 0, -2);
 			$carriers = Carrier::where('rut', $rut)->where('registered',null)->get()->toArray();        	
 
+
         }
 
 		return response()->json($carriers);
@@ -43,6 +49,7 @@ class CarrierController extends Controller
 
 
 	public function index(Request $request){
+
 
 		$carrier = carrier::where('registered',null)->get();
 		return response()->json($carrier);
@@ -91,6 +98,7 @@ class CarrierController extends Controller
 
 
 
+
     public function notRegistered (){
         $carriers = Carrier::where('registered','!=',null)->orderBy('name')->get();
 
@@ -131,6 +139,5 @@ class CarrierController extends Controller
         return response()->json($carrierNew);
 
     }
-
 
 }

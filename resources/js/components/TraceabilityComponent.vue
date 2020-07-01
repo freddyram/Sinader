@@ -164,7 +164,9 @@
     created(){
         var app = this;
         this.initialize();
+
         EventBus.$on('saveResidues', function(){  
+
             //alert('residues');
             app.refreshList();
         });
@@ -175,7 +177,7 @@
         initialize(){
             var app = this;
 
-            
+
             this.residue= this.waste_detail.waste;
 
             if(this.waste_detail.discrep_quantity>0){

@@ -1,6 +1,57 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/dusk/compare/v5.8.1...5.0)
+## [Unreleased](https://github.com/laravel/dusk/compare/v5.11.0...5.0)
+
+
+## [v5.11.0 (2020-03-24)](https://github.com/laravel/dusk/compare/v5.10.0...v5.11.0)
+
+### Added
+- Add assert attribute methods ([#751](https://github.com/laravel/dusk/pull/751))
+
+### Fixed
+- Fix Call to undefined method ([#750](https://github.com/laravel/dusk/pull/750))
+- Avoid throwing exception on production ([#755](https://github.com/laravel/dusk/pull/755))
+
+
+## [v5.10.0 (2020-03-17)](https://github.com/laravel/dusk/compare/v5.9.2...v5.10.0)
+
+### Added
+- Adds `typeSlowly` & `appendSlowly` ([#748](https://github.com/laravel/dusk/pull/748))
+
+
+## [v5.9.2 (2020-02-18)](https://github.com/laravel/dusk/compare/v5.9.1...v5.9.2)
+
+### Fixed
+- Bugfix quoting for `InteractsWithElements::value` ([#735](https://github.com/laravel/dusk/pull/735))
+- Remove php-webdriver constraints ([#737](https://github.com/laravel/dusk/pull/737))
+
+
+## [v5.9.1 (2020-02-12)](https://github.com/laravel/dusk/compare/v5.9.0...v5.9.1)
+
+### Fixed
+- Adds the missing import for `InteractsWithMouse@clickAtXPath` ([#728](https://github.com/laravel/dusk/pull/728))
+- Size sanity check at fitContent ([#730](https://github.com/laravel/dusk/pull/730))
+- Lock php-webdriver constraints for now ([#733](https://github.com/laravel/dusk/pull/733))
+
+
+## [v5.9.0 (2020-01-28)](https://github.com/laravel/dusk/compare/v5.8.2...v5.9.0)
+
+### Added
+- Add `clickAtXPath` ([#723](https://github.com/laravel/dusk/pull/723), [effe73d](https://github.com/laravel/dusk/commit/effe73d6eb61b4bd77f88814bcd679e4fceb6f25))
+- Add `ProvidesBrowser::getCallerName()` ([#725](https://github.com/laravel/dusk/pull/725))
+
+### Fixed
+- Fit content to `<html>` instead of `<body>` ([#726](https://github.com/laravel/dusk/pull/726))
+
+
+## [v5.8.2 (2020-01-21)](https://github.com/laravel/dusk/compare/v5.8.1...v5.8.2)
+
+### Changed
+- Rename php-webdriver package ([#720](https://github.com/laravel/dusk/pull/720))
+- Update jQuery file ([#721](https://github.com/laravel/dusk/pull/721))
+
+### Fixed
+- Update `fitContent()` ([#717](https://github.com/laravel/dusk/pull/717))
 
 
 ## [v5.8.1 (2020-01-07)](https://github.com/laravel/dusk/compare/v5.8.0...v5.8.1)

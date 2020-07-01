@@ -26,7 +26,9 @@
         <td class="text-xs-right">{{ props.item.status }}</td>
 
         <td> 
+
             <v-btn  v-if="props.item.status=='ENVIADA'" small @click="toReceive(props.item)" color="main_green" dark>Recepcionar</v-btn>
+
 
         </td>   
       </template>
@@ -51,7 +53,9 @@
       	<v-toolbar-title>Recepción de Residuos no Peligrosos Generadores No Registrados</v-toolbar-title>
 
  	    <v-spacer></v-spacer>
+
         <v-btn @click='toNNReceive(false)' color="main_green">Nueva Recepción</v-btn>
+
     </v-toolbar>
 
 
@@ -71,7 +75,9 @@
 
 
         <td> 
+
             <v-btn small @click="toNNReceive(props.item)" color="main_green" dark>Editar</v-btn>
+
         </td>   
       </template>
     </v-data-table>
@@ -161,6 +167,7 @@
         toReceive ($declaration){
 
             var ComponentReserv = Vue.extend(DeclarationComponent)
+
             var instance = new ComponentReserv({store: this.$store, propsData: {
             declaration_edit: $declaration,
              
@@ -170,6 +177,7 @@
         },
 
 
+
         toNNReceive (declaration){
 
 
@@ -177,6 +185,7 @@
             var instance = new ComponentReserv({store: this.$store, propsData: {
               declaration_edit: declaration, 
             }});
+
             instance.$mount();
             this.$refs.container.replaceChild(instance.$el);
         },

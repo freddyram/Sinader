@@ -23,6 +23,7 @@ class CreateMonthWastesTable extends Migration
             $table->string('carrier');
             $table->string('plate');
             $table->string('date');
+            $table->integer('manage');
             $table->timestamps();
         });
     }

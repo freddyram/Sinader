@@ -98,7 +98,9 @@
         checkbox:false,
         dialog: true,
 
+
         unidad:'Toneladas',
+
         cantidad:0,
         residue_name:'',
         comment:'',

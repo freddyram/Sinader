@@ -27,7 +27,9 @@
 
 
         <v-card-text>
+
            <v-form ref="form"  lazy-validation>
+
                         <v-layout>
                         <v-flex xs12 class="px-1">
                             <v-col cols="12" lg="6">
@@ -47,11 +49,13 @@
                                       persistent-hint
                                       prepend-icon="event"
                                       readonly
+
                                       :rules="notnullRule"
                                       v-on="on"
                                     ></v-text-field>
                                   </template>
                                   <v-date-picker v-model="move_date" :min="minDate" :max="maxDate" no-title @input="val_move_date"></v-date-picker>
+
                                 </v-menu>
                             </v-col>
 
@@ -63,7 +67,9 @@
                             <v-text-field color="main_green" box placeholder="Seleccionar" @click='toSearch' v-model="transport"  readonly label="Empresa Trasnporte"></v-text-field>
                         </v-flex>    
 
+
                     </v-layout>
+
 
                     <v-layout>
                         <v-flex xs12 class="px-1">
@@ -101,6 +107,7 @@
                         </v-flex>
                     </v-layout>                     
            </v-form>      
+
         </v-card-text>
 
         <v-divider></v-divider>
@@ -138,23 +145,31 @@
   export default {
 
 
+
     data () {
       return {
         notnullRule: [(v) => !!v || "Campo requerido"],
 
         minDate: new Date('2020-01-01T00:00:00').toISOString().slice(0,10),
         maxDate: new Date('2020-12-31T23:59:59').toISOString().slice(0,10),
+
+
         checkbox:false,
         dialog: true,
         menu1: false,
 
         carrier:'',
+
+        vehicle_type:'',
+
         vahicle:'',
         trasnport:'',
 
         texto: 'Atención: Si el transporte no se encuentra en el listado, incorporelo a su declaración. Este listado será informado a los servicios fiscalizadores',
 
         carriers: [],
+
+        vehicle_types: [],
 
         vehicles: [],    
 
@@ -168,9 +183,11 @@
             app.refreshCarrier();
         });
 
+
         EventBus.$once('saveTransport', function(){  
             app.refreshCarrierNotReg();
         });
+
 
 
     },
@@ -187,6 +204,7 @@
             //     });
 
 
+
             // axios.get('/api/vehicletype')
             //     .then(function (resp) {    
             //         app.vehicle_types = resp.data;
@@ -198,6 +216,7 @@
 
         refreshCarrier(){
 
+
             axios.get('/api/vehicletype')
                 .then(function (resp) {    
                     app.vehicle_types = resp.data;
@@ -208,17 +227,18 @@
         },
 
         refreshCarrier(){
-            
 
             this.transport = this.$store.getters.carrier.name;
             this.changeCarrier(this.$store.getters.carrier);
         },
 
 
+
         refreshCarrierNotReg(){
 
 
         },
+
 
         changeCarrier(carrier_selected){
           this.carrier_selected = carrier_selected;
@@ -253,6 +273,7 @@
         toSearch(){
                 var ComponentReserv = Vue.extend(SearchTransportComponent)
                 var instance = new ComponentReserv({store: this.$store, propsData: {
+
                 }});
                 instance.$mount();
                 this.$refs.container.replaceChild(instance.$el);
@@ -265,6 +286,7 @@
         },
 
         saveCarrier(){
+
 
            if (this.$refs.form.validate()){
                 var transport={

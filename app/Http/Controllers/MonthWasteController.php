@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Excel;
 use App\Imports\MonthWasteImport;
 
+use App\Exports\MonthWasteExport;
+
+
 
 class MonthWasteController extends Controller
 {
@@ -21,6 +24,13 @@ class MonthWasteController extends Controller
         (new MonthWasteImport)->import(request()->file('file'));
 
         return redirect('/')->with('success', 'Archivo importado correctamente!');
+    }
+
+
+    public function export() 
+    {
+        Info('******** Export *********');
+        return Excel::download(new MonthWasteExport, 'plantilla.xlsx');
     }
 
 
@@ -66,6 +76,9 @@ class MonthWasteController extends Controller
             $waste_detail->unit_id          = 1;
             $waste_detail->carrier_id       = $carrier->carrier_id;
             $waste_detail->plate            = $waste['plate'];
+
+            $waste_detail->manage_id        = $waste['manage'];
+
 
             $waste_detail->save();
 

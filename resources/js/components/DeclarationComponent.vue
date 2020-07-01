@@ -208,7 +208,9 @@
                     <v-icon>edit</v-icon>
                 </v-btn>
 
+
                 <v-btn  icon @click="delete_item(props.index)" >
+
                     <v-icon>delete</v-icon>
                 </v-btn>
             </td>   
