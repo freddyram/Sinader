@@ -20,6 +20,7 @@ use App\LerChapter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Imports\MonthWasteImport;
+use App\Imports\MonthWasteImports;
 use Excel;
 
 use App\Exports\MonthWasteExport;
@@ -457,7 +458,7 @@ class DeclarationController extends Controller
       return 0;
     }
 
-    function upload(Request $request){
+     function upload(Request $request){
         //$rows = Excel::toArray(new MonthWaste, $request->file('file'));
         //return response()->json(["rows"=>$rows]);
 
@@ -471,12 +472,16 @@ class DeclarationController extends Controller
 
         $ExcelImport = Excel::import(new MonthWasteImport, $request->file('file'));
         //(new MonthWasteImport)->import(request()->file('file'));
+
+        Info("Termina ExcelImport");
         
         $errors = [];
         
         //return response()->json(["rows"=>$rows]);
 
         $monthwaste = monthwaste::all()->toArray();
+
+        Info($monthwaste);
         
         $residue = [];
         $waste_detail = [];
@@ -500,11 +505,7 @@ class DeclarationController extends Controller
             $company = Company::where('rut', $rut_company)->first();
             $establishment = Establishment::where('retc_code', $waste['entablishment'])->first();
             $process = ProcessType::where('id', $waste['process'])->first();
-
             $manage = ManageType::where('id', $waste['manage'])->first();
-
-
-
             $carrier = Carrier::where('rut', $rut_carrier )->first();
             $vehicle = Vehicle::where('plate', $waste['plate'])->first();
             $ler_waste = LerWaste::where('waste_code', $waste['ler'])->first();
@@ -576,7 +577,6 @@ class DeclarationController extends Controller
 
             $waste_detail[$ind]['plate']            = $waste['plate'];
 
-
              if($manage){
                 $waste_detail[$ind]['manage_id']   = $manage->id;
                 $waste_detail[$ind]['gestion']   = $manage->name;
@@ -584,18 +584,20 @@ class DeclarationController extends Controller
                 $errors[] = "Linea ".$line.": gestión no existe";
             }
 
+
             $ind++;
 
         }
 
         if($errors){
+            Info($errors);
             return response()->json(["errors"=>$errors]);
         }else{
+            Info($waste_detail);
             return response()->json($waste_detail);  
         }
 
     }
-
 
     public function export() 
     {

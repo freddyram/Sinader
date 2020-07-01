@@ -54,7 +54,7 @@ final class Versions
   'markbaker/matrix' => '1.2.0@5348c5a67e3b75cd209d70103f916a93b1f1ed21',
   'monolog/monolog' => '1.25.4@3022efff205e2448b560c833c6fbbf91c3139168',
   'myclabs/php-enum' => '1.7.6@5f36467c7a87e20fbdc51e524fd8f9d1de80187c',
-  'nesbot/carbon' => '2.35.0@4b9bd835261ef23d36397a46a76b496a458305e5',
+  'nesbot/carbon' => '2.36.0@d0b65958d9942fd1b501fdb0800c67e8323aa08d',
   'nikic/php-parser' => 'v4.5.0@53c2753d756f5adb586dca79c2ec0e2654dd9463',
   'ocramius/package-versions' => '1.4.2@44af6f3a2e2e04f2af46bcb302ad9600cba41c7d',
   'opis/closure' => '3.5.5@dec9fc5ecfca93f45cd6121f8e6f14457dff372c',
@@ -136,7 +136,7 @@ final class Versions
   'sebastian/version' => '2.0.1@99732be0ddb3361e16ad77b68ba41efc8e979019',
   'theseer/tokenizer' => '1.1.3@11336f6f84e16a720dae9d8e6ed5019efa85a0f9',
   'webmozart/assert' => '1.9.0@9dc4f203e36f2b486149058bade43c851dd97451',
-  'laravel/laravel' => 'dev-excelnew@033b8c2e4bd378b1e383d24428720028df3697cd',
+  'laravel/laravel' => 'dev-master@1ea4d641b218dc0ed0bd9a63358cb6cb2e36c2e3',
 );
 
     private function __construct()

@@ -2,9 +2,7 @@
 
 
      <v-layout row justify-center>
-
     <v-dialog v-model="dialog" persistent max-width="700">
-
       <template v-slot:activator="{ on }">
 
         <v-btn v-on="on" flat color="red lighten-2">
@@ -41,13 +39,11 @@
             Cancelar
                 <v-icon right>cancel</v-icon>
           </v-btn>
-
           <v-spacer></v-spacer>
           <v-btn  class="ma-2 white--text" @click='toExport' color="main_green">
                 Bajar Plantilla
                 <v-icon right>cloud_download</v-icon>
           </v-btn>
-
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -61,9 +57,7 @@
   import Vue from 'vue';  
   import Vuex from 'vuex'; 
   import { mapState } from 'vuex';  
-
   import { EventBus } from './../eventbus.js';
-
   export default {
     data: () => ({
         dialog: true,
@@ -95,19 +89,16 @@
             }
         },
         uploadAll(){
-
             // if (this.$refs.form.validate()){
                 var declaration = {
                      declaration_id: 1 
                     
                 }
-
                 let formData = new FormData();
                 let app = this;
                 formData.append('data',  JSON.stringify(declaration));
                 formData.append('file', this.imageFile);
                 //formData.append('waste_detail', this.residues);
-
                 axios.post('/api/declaration/upload',formData,
                     {
                         headers: {
@@ -116,33 +107,27 @@
                 })
                 .then(function (resp) {
                     
-                    app.$store.commit('changeWastedetail', resp.data);
 
+                    app.$store.commit('changeWastedetail', resp.data);
                     EventBus.$emit('excelUpload', "someValue");
                     //this.residues = resp.data;
                     
-
                     //alert(JSON.stringify(resp.data));
                 })
                 .catch(function (resp) {
                     console.log(resp);
                 });
                 this.dialog = false;     
-
                       
             // }
-
         },
-
         toExport(){
                 let options = {
                     headers: {
                       'Authorization': 'Bearer ' + this.$store.getters.token,
                     }
                   }
-
                 //alert("exportar :" +  this.$store.getters.token);
-
                 axios({
                     method:'GET',
                     url: '/api/declaration/export',      
@@ -151,7 +136,6 @@
                 })
                 .then(function (resp) {      
             
-
                     const url = window.URL.createObjectURL(new Blob([resp.data], {type:'application/vnd.ms-excel'}));
                     const link = document.createElement('a');
                     
@@ -160,7 +144,6 @@
                     document.body.appendChild(link);
                     link.click();
                     console.log(resp.data);
-
                 })
                 .catch(function (resp) {
                     console.log(resp);

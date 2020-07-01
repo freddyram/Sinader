@@ -23,7 +23,8 @@ class MonthWasteImport implements ToModel, WithHeadingRow, WithValidation, Skips
 
     public function model(array $row)
     {
-        try {
+        Info("procesando");
+        // try {
             return new MonthWaste([
             //
           //  'id' => $row['id'],
@@ -35,13 +36,11 @@ class MonthWasteImport implements ToModel, WithHeadingRow, WithValidation, Skips
                 'carrier' => $row['rut_transportista'],
                 'plate' => $row['patente'],
                 'date' => $row['fecha'],
-
                 'manage' => $row['gestion']
-
             ]);
-        } catch (\Exception $e) {
-            dd($e->getMessage(), $row);
-        }
+        // } catch (\Exception $e) {
+        //     dd($e->getMessage(), $row);
+        // }
     }
 
     public function getErrors()
@@ -60,7 +59,6 @@ class MonthWasteImport implements ToModel, WithHeadingRow, WithValidation, Skips
             'cantidad' => 'required',
             'rut_transportista' => 'required',
             'patente' => 'required',
-
             'fecha' => 'required',
             'gestion' => 'required'
 
