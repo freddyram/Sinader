@@ -10,7 +10,7 @@
           <v-toolbar-title>Nueva Declaración</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn flat class='white--text' v-if="this.declaration.status!='ENVIADA'"  @click="sinMovimiento()">Declarar Sin Movimiento</v-btn>
+            <v-btn flat class='white--text' v-if="this.declaration.status=='CREADA'"  @click="sinMovimiento()">Declarar Sin Movimiento</v-btn>
 
           </v-toolbar-items>
         </v-toolbar>
@@ -177,12 +177,12 @@
         <v-toolbar  color="secondary_green" dark>
             <v-toolbar-title >Residuos</v-toolbar-title>
         <v-spacer></v-spacer>
-            <v-btn  v-if="this.declaration.status!='ENVIADA'" class="ma-2 white--text" @click='toNewResidue' color="main_green">
+            <v-btn  v-if="this.declaration.status=='CREADA'" class="ma-2 white--text" @click='toNewResidue' color="main_green">
                 Agregar
                 <v-icon right>add</v-icon>
             </v-btn>          
         
-            <v-btn v-if="this.declaration.status!='ENVIADA'" @click='toUpload' color="main_green">Subir Excel
+            <v-btn v-if="this.declaration.status=='CREADA'" @click='toUpload' color="main_green">Subir Excel
                 <v-icon right>cloud_upload</v-icon>
             </v-btn>
             <!-- <v-btn v-if="this.declaration.status!='ENVIADA'" @click='toSendMail' color="main_green">Prueba Mail</v-btn> -->
@@ -191,7 +191,7 @@
           :headers="headers"
           :items="residues"
           class="elevation-1"
-          v-if="this.declaration.status!='ENVIADA'"
+          v-if="this.declaration.status=='CREADA'"
         >
           <template v-slot:items="props">
             <td class="text-xs-right">{{ props.item.waste }}</td>
@@ -222,7 +222,7 @@
           :headers="headers"
           :items="residues"
           class="elevation-1"
-          v-if="this.declaration.status=='ENVIADA'"
+          v-if="this.declaration.status!='CREADA'"
         >
           <template v-slot:items="props">
             <td class="text-xs-right">{{ props.item.waste }}</td>
@@ -240,7 +240,7 @@
                 </v-flex>
                 <v-flex xs2 class="px-1">
                     
-                    <v-btn v-if="this.declaration.status!='ENVIADA'" class="ma-2 white--text" color="main_green"  @click="createdeclaration()">
+                    <v-btn v-if="this.declaration.status=='CREADA'" class="ma-2 white--text" color="main_green"  @click="createdeclaration()">
                         Guardar
                         <v-icon right>save</v-icon>
                     </v-btn>
@@ -341,6 +341,8 @@
             var app = this;
 
             if(this.declaration_edit){
+
+                // alert('edit');
                 app.declaration = app.declaration_edit;
                 app.correlative = app.declaration_edit.correlative + '-' + app.declaration_edit.correlative_dv;     
 
@@ -353,6 +355,8 @@
                     }); 
 
             } else {
+                // alert('create');
+
                 axios.post('/api/declaration/create')
                     .then(function (resp) {    
                         app.declaration = resp.data;

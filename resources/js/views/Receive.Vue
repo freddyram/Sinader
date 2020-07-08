@@ -26,11 +26,12 @@
         <td class="text-xs-right">{{ props.item.status }}</td>
 
         <td> 
-
             <v-btn  v-if="props.item.status=='ENVIADA'" small @click="toReceive(props.item)" color="main_green" dark>Recepcionar</v-btn>
-
-
+        </td>
+        <td v-if="props.item.status!='ENVIADA'" > 
+            <v-btn  small @click="toNewDeclaration(props.item)" color="secondary_green" dark>Ver</v-btn>
         </td>   
+
       </template>
     </v-data-table>
 
@@ -98,7 +99,8 @@
   import { EventBus2 } from './../eventbus2.js';
 
  
-  import DeclarationComponent  from './../components/ReceiveComponent';
+  import ReceiveComponent  from './../components/ReceiveComponent';
+  import DeclarationComponent  from './../components/DeclarationComponent';
   import NewReceiveComponent  from './../components/NewReceiveComponent';
 
 
@@ -163,12 +165,23 @@
 
         },
 
+        toNewDeclaration (declaration){
+
+            var Component = Vue.extend(DeclarationComponent)
+            var instance = new Component({store: this.$store, propsData: {
+            declaration_edit: declaration,
+            }});
+            instance.$mount();
+            this.$refs.container.innerHTML = "" 
+            this.$refs.container.replaceChild(instance.$el);
+        },
+
 
         toReceive ($declaration){
 
-            var ComponentReserv = Vue.extend(DeclarationComponent)
+            var Component = Vue.extend(ReceiveComponent)
 
-            var instance = new ComponentReserv({store: this.$store, propsData: {
+            var instance = new Component({store: this.$store, propsData: {
             declaration_edit: $declaration,
              
           }});
@@ -181,8 +194,8 @@
         toNNReceive (declaration){
 
 
-            var ComponentReserv = Vue.extend(NewReceiveComponent)
-            var instance = new ComponentReserv({store: this.$store, propsData: {
+            var Component = Vue.extend(NewReceiveComponent)
+            var instance = new Component({store: this.$store, propsData: {
               declaration_edit: declaration, 
             }});
 

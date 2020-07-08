@@ -74,7 +74,7 @@
                 <td v-if="props.item.status=='CREADA'"> 
                     <v-btn   small @click="enviar(props.item)" color="secondary_green" dark>Enviar</v-btn>
                 </td>   
-                <td v-if="props.item.status=='ENVIADA'" > 
+                <td v-if="props.item.status!='CREADA'" > 
                     <v-btn  small @click="toNewDeclaration(props.item)" color="secondary_green" dark>Ver</v-btn>
                 </td> 
               </template>

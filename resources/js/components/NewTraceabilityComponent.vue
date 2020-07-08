@@ -176,7 +176,8 @@
 
         residue: '',
         cantidad: '',
-        unidad: '',
+        units:[],
+        unidad: 'Toneladas',
 
         pais:' ',
         empresa:' ',
@@ -228,7 +229,8 @@
                 });
 
             axios.get('/api/unit')
-                .then(function (resp) {    
+                .then(function (resp) {   
+                    // alert(JSON.stringify(resp.data)); 
                     app.units = resp.data;
                 })
                 .catch(function (resp) {

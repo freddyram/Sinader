@@ -2372,6 +2372,7 @@ __webpack_require__.r(__webpack_exports__);
       var app = this;
 
       if (this.declaration_edit) {
+        // alert('edit');
         app.declaration = app.declaration_edit;
         app.correlative = app.declaration_edit.correlative + '-' + app.declaration_edit.correlative_dv;
         axios.get('/api/waste_details/' + app.declaration.id).then(function (resp) {
@@ -2380,6 +2381,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(resp);
         });
       } else {
+        // alert('create');
         axios.post('/api/declaration/create').then(function (resp) {
           app.declaration = resp.data;
           app.correlative = app.declaration.correlative + '-' + app.declaration.correlative_dv;
@@ -5096,7 +5098,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       dialog: true,
       residue: '',
       cantidad: '',
-      unidad: '',
+      units: [],
+      unidad: 'Toneladas',
       pais: ' ',
       empresa: ' ',
       contacto: ' ',
@@ -5133,6 +5136,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log(resp);
       });
       axios.get('/api/unit').then(function (resp) {
+        // alert(JSON.stringify(resp.data)); 
         app.units = resp.data;
       })["catch"](function (resp) {
         console.log(resp);
@@ -9270,7 +9274,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _eventbus_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../eventbus.js */ "./resources/js/eventbus.js");
 /* harmony import */ var _eventbus2_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../eventbus2.js */ "./resources/js/eventbus2.js");
 /* harmony import */ var _components_ReceiveComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../components/ReceiveComponent */ "./resources/js/components/ReceiveComponent.vue");
-/* harmony import */ var _components_NewReceiveComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../components/NewReceiveComponent */ "./resources/js/components/NewReceiveComponent.vue");
+/* harmony import */ var _components_DeclarationComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../components/DeclarationComponent */ "./resources/js/components/DeclarationComponent.vue");
+/* harmony import */ var _components_NewReceiveComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../components/NewReceiveComponent */ "./resources/js/components/NewReceiveComponent.vue");
 //
 //
 //
@@ -9363,6 +9368,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 
 
 
@@ -9427,9 +9434,21 @@ __webpack_require__.r(__webpack_exports__);
         alert("Error declarations/index :" + resp);
       });
     },
+    toNewDeclaration: function toNewDeclaration(declaration) {
+      var Component = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_DeclarationComponent__WEBPACK_IMPORTED_MODULE_5__["default"]);
+      var instance = new Component({
+        store: this.$store,
+        propsData: {
+          declaration_edit: declaration
+        }
+      });
+      instance.$mount();
+      this.$refs.container.innerHTML = "";
+      this.$refs.container.replaceChild(instance.$el);
+    },
     toReceive: function toReceive($declaration) {
-      var ComponentReserv = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_ReceiveComponent__WEBPACK_IMPORTED_MODULE_4__["default"]);
-      var instance = new ComponentReserv({
+      var Component = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_ReceiveComponent__WEBPACK_IMPORTED_MODULE_4__["default"]);
+      var instance = new Component({
         store: this.$store,
         propsData: {
           declaration_edit: $declaration
@@ -9439,8 +9458,8 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs.container.replaceChild(instance.$el);
     },
     toNNReceive: function toNNReceive(declaration) {
-      var ComponentReserv = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_NewReceiveComponent__WEBPACK_IMPORTED_MODULE_5__["default"]);
-      var instance = new ComponentReserv({
+      var Component = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_NewReceiveComponent__WEBPACK_IMPORTED_MODULE_6__["default"]);
+      var instance = new Component({
         store: this.$store,
         propsData: {
           declaration_edit: declaration
@@ -11510,7 +11529,7 @@ var render = function() {
                   _c(
                     "v-toolbar-items",
                     [
-                      this.declaration.status != "ENVIADA"
+                      this.declaration.status == "CREADA"
                         ? _c(
                             "v-btn",
                             {
@@ -12049,7 +12068,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("v-spacer"),
                   _vm._v(" "),
-                  this.declaration.status != "ENVIADA"
+                  this.declaration.status == "CREADA"
                     ? _c(
                         "v-btn",
                         {
@@ -12067,7 +12086,7 @@ var render = function() {
                       )
                     : _vm._e(),
                   _vm._v(" "),
-                  this.declaration.status != "ENVIADA"
+                  this.declaration.status == "CREADA"
                     ? _c(
                         "v-btn",
                         {
@@ -12087,7 +12106,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              this.declaration.status != "ENVIADA"
+              this.declaration.status == "CREADA"
                 ? _c("v-data-table", {
                     staticClass: "elevation-1",
                     attrs: { headers: _vm.headers, items: _vm.residues },
@@ -12169,7 +12188,7 @@ var render = function() {
                   })
                 : _vm._e(),
               _vm._v(" "),
-              this.declaration.status == "ENVIADA"
+              this.declaration.status != "CREADA"
                 ? _c("v-data-table", {
                     staticClass: "elevation-1",
                     attrs: { headers: _vm.headers, items: _vm.residues },
@@ -12222,7 +12241,7 @@ var render = function() {
                     "v-flex",
                     { staticClass: "px-1", attrs: { xs2: "" } },
                     [
-                      this.declaration.status != "ENVIADA"
+                      this.declaration.status == "CREADA"
                         ? _c(
                             "v-btn",
                             {
@@ -17573,7 +17592,7 @@ var render = function() {
                                 )
                               : _vm._e(),
                             _vm._v(" "),
-                            props.item.status == "ENVIADA"
+                            props.item.status != "CREADA"
                               ? _c(
                                   "td",
                                   [
@@ -20130,7 +20149,34 @@ var render = function() {
                                   : _vm._e()
                               ],
                               1
-                            )
+                            ),
+                            _vm._v(" "),
+                            props.item.status != "ENVIADA"
+                              ? _c(
+                                  "td",
+                                  [
+                                    _c(
+                                      "v-btn",
+                                      {
+                                        attrs: {
+                                          small: "",
+                                          color: "secondary_green",
+                                          dark: ""
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.toNewDeclaration(
+                                              props.item
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Ver")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _vm._e()
                           ]
                         }
                       }

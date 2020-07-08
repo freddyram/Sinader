@@ -37,7 +37,7 @@ class DeclarationController extends Controller
         $user = Auth::user();
         $user_establishment = UserEstablishment::where('user_id', $user->id)->first();
 
-        $declarations = Declaration::where('establishment_id',$user_establishment->establishment_id)->get();
+        $declarations = Declaration::where('establishment_id',$user_establishment->establishment_id)->orderBy('correlative')->get();
         return response()->json($declarations);
     }
 
@@ -45,7 +45,7 @@ class DeclarationController extends Controller
     public function indexAdmin()
     {
 
-        $declarations = Declaration::all();
+        $declarations = Declaration::orderBy('id')->get();
         return response()->json($declarations);
     }
 
@@ -68,7 +68,7 @@ class DeclarationController extends Controller
             'declarations.direccion',
             'declarations.comuna',
             'declarations.region'
-            )->distinct()->join('waste_details','declarations.id',"=",'waste_details.declaration_id')->where('waste_details.establishment_id',$receiver_id)->where('generator','REGISTERED')->get();
+            )->distinct()->join('waste_details','declarations.id',"=",'waste_details.declaration_id')->where('waste_details.establishment_id',$receiver_id)->where('generator','REGISTERED')->where('declarations.status','!=','CREADA')->orderBy('correlative')->get();
 
         return response()->json($declarations);   
     }
@@ -92,7 +92,7 @@ class DeclarationController extends Controller
             'declarations.direccion',
             'declarations.comuna',
             'declarations.region'
-            )->distinct()->join('waste_details','declarations.id',"=",'waste_details.declaration_id')->where('waste_details.establishment_id',$receiver_id)->where('generator','UNREGISTERED')->get();
+            )->distinct()->join('waste_details','declarations.id',"=",'waste_details.declaration_id')->where('waste_details.establishment_id',$receiver_id)->where('generator','UNREGISTERED')->orderBy('correlative')->get();
 
         return response()->json($declarations);   
     }
@@ -114,7 +114,7 @@ class DeclarationController extends Controller
         $user = Auth::user();
         $user_establishment = UserEstablishment::where('user_id', $user->id)->first();
 
-        $last_declaration = Declaration::where('establishment_id', $user_establishment->establishment_id)->get()->last();
+        $last_declaration = Declaration::where('establishment_id', $user_establishment->establishment_id)->orderBy('correlative')->get()->last();;
 
         $declaration = new Declaration();
         $declaration->correlative       = 1;
