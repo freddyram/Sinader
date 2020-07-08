@@ -114,7 +114,7 @@ class DeclarationController extends Controller
         $user = Auth::user();
         $user_establishment = UserEstablishment::where('user_id', $user->id)->first();
 
-        $last_declaration = Declaration::where('establishment_id', $user_establishment->establishment_id)->orderBy('correlative')->get()->last();;
+        $last_declaration = Declaration::orderBy('correlative')->get()->last();
 
         $declaration = new Declaration();
         $declaration->correlative       = 1;
