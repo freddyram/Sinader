@@ -9,14 +9,17 @@ use App\Http\Controllers\Controller;
 
 class MailController extends Controller {
   
-   public function html_email() {
-      $data = array('name'=>"Virat Gandhi");
-      Mail::send('mail', $data, function($message) {
-         $message->to('abc@gmail.com', 'Tutorials Point')->subject
-            ('Laravel HTML Testing Mail');
-         $message->from('xyz@gmail.com','Virat Gandhi');
-      });
-      echo "HTML Email Sent. Check your inbox.";
+   public function emailRejectedDeclaration(Request $request)) {
+      
+        $declaration_id = $request->input('declaration_id');
+        $declaration = Declaration::where('id',$declaration_id)->get()->first();
+        $user_establishment = UserEstablishment::where('entablishment_id', $declaration->entablishment_id)->get()->first();
+        $user = User::where('id', $user_establishment->user_id)->first();        
+
+		$declaration_number = $declaration->correlative;
+
+      	Mail::to($user->email)->send(new SendRejectDeclaration($declaration_number);
+      	echo "Correo Enviado";
    }
 
 }

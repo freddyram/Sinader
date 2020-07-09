@@ -34,11 +34,20 @@ class MonthWasteImport implements ToModel, WithHeadingRow, WithValidation, Skips
                 'quantity' => $row['cantidad'],
                 'carrier' => $row['rut_transportista'],
                 'plate' => $row['patente'],
-                'date' => $row['fecha'],
+                'date' => $this->transformDate($row['fecha']),
                 'manage' => $row['gestion']
             ]);
         } catch (\Exception $e) {
             dd($e->getMessage(), $row);
+        }
+    }
+
+    public function transformDate($value, $format = 'd-m-Y')
+    {
+        try {
+            return \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value));
+        } catch (\ErrorException $e) {
+            return \Carbon\Carbon::createFromFormat($format, $value);
         }
     }
 

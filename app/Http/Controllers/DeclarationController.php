@@ -490,14 +490,13 @@ class DeclarationController extends Controller
             Info($rut_carrier);
             Info("***************");
 
-            $company = Company::where('rut', $rut_company)->first();
-            $establishment = Establishment::where('retc_code', $waste['entablishment'])->first();
+            $company = Company::where('rut', $rut_company)->get()->first();
+            $establishment = Establishment::where('id', $waste['entablishment'])->first();
             $process = ProcessType::where('id', $waste['process'])->first();
             $manage = ManageType::where('id', $waste['manage'])->first();
-            $carrier = Carrier::where('rut', $rut_carrier )->first();
-            $vehicle = Vehicle::where('plate', $waste['plate'])->first();
-            $ler_waste = LerWaste::where('waste_code', $waste['ler'])->first();
-  
+            $carrier = Carrier::where('rut', $rut_carrier )->get()->first();
+            $vehicle = Vehicle::where('plate', $waste['plate'])->get()->first();
+            $ler_waste = LerWaste::where('waste_code', $waste['ler'])->get()->first();
             $waste_detail[$ind]['declaration_id']   = 1; //$declaration_id;
             
             if($ler_waste){
@@ -517,7 +516,10 @@ class DeclarationController extends Controller
                 $errors[] = "Linea ".$line.": Residuo no existe";
             }
 
-               
+            $waste_detail[$ind]['pais']     = 'Chile';   
+            $waste_detail[$ind]['empresa']  = '';
+            $waste_detail[$ind]['contacto'] = '';
+            $waste_detail[$ind]['email']    = '';
 
             if($company){
                 $waste_detail[$ind]['company_id']   = $company->id;
@@ -554,8 +556,8 @@ class DeclarationController extends Controller
             $waste_detail[$ind]['unit_id']          = 2;
 
             if($carrier){
-                $waste_detail[$ind]['carrier_id']     = $carrier->carrier_id;
-                $waste_detail[$ind]['carrier_name']   = $carrier->carrier_name;
+                $waste_detail[$ind]['carrier_id']     = $carrier->id;
+                $waste_detail[$ind]['carrier_name']   = $carrier->name;
                 $waste_detail[$ind]['trasnport_date'] = $waste['date'];
                // $waste_detail->plate              = $waste['plate'];            
                 
