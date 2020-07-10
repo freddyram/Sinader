@@ -122,7 +122,7 @@
     created () {
         var app = this;
         EventBus2.$on('saveDeclaration', function(){   
-            app.getdecalrations();
+            app.getdeclarations();
         });
 
         this.initialize();
@@ -130,10 +130,10 @@
     
     methods: {
         initialize(){
-            this.getdecalrations();
+            this.getdeclarations();
         },  
 
-        getdecalrations(){
+        getdeclarations(){
             var app = this;
             axios.get('/api/declarations')
                 .then(function (resp) {    
@@ -161,7 +161,7 @@
             var app = this;
             axios.post('/api/declaration/delete/'+declaration.id)
                 .then(function (resp) {  
-                    app.getdecalrations();  
+                    app.getdeclarations();  
                 })
                 .catch(function (resp) {
                     console.log(resp);
@@ -173,12 +173,58 @@
             var app = this;
             axios.post('/api/declaration/enviar/'+declaration.id)
                 .then(function (resp) {  
-                    app.getdecalrations();  
+                    app.getdeclarations();  
                 })
                 .catch(function (resp) {
                     console.log(resp);
                     alert("Error declarations/index :" + resp);
                 });
+
+            alert("Grabar PDF");
+
+            axios.get('/api/declaration/pdf/'+declaration.id,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/pdf'
+                    },
+                    responseType: "blob"
+                // })
+                // then(function (resp) {  
+                    
+                // FileSaver.saveA(Blob([resp.data]), storage_path("certificado" + declaration.id + ".pdf"));
+
+
+                })
+                .catch(function (resp) {
+                    console.log(resp);
+                    alert("Error declarations/index :" + resp);
+                });
+
+                if (this.$store.getters.type=='GeneradorIndustrial')
+                {
+                    alert('Envío de Correo Generador Industrial')
+
+                    axios.get('/api/mail/sendcertinddeclaration/'+declaration_id)
+                        .then(function (resp) {    
+                            alert(JSON.stringify(resp.data)); 
+                            EventBus.$emit('CertIndDeclaration', 'someValue');               
+                        })
+                        .catch(function (resp) {
+                            console.log(resp);
+                        });             
+                }else{
+                    alert('Envío de Correo Generador Municipal')
+
+                    axios.get('/api/mail/sendcertmundeclaration/'+declaration_id)
+                        .then(function (resp) {    
+                            alert(JSON.stringify(resp.data)); 
+                            EventBus.$emit('CertMunDeclaration', 'someValue');               
+                        })
+                        .catch(function (resp) {
+                            console.log(resp);
+                        });  
+                }
         },
 
         toPdf(declaration){
