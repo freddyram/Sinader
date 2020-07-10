@@ -64,7 +64,7 @@
                     </v-layout>
                     <v-layout>
                         <v-flex xs12 class="px-1">                         
-                            <v-text-field color="main_green" box placeholder="Seleccionar" @click='toSearch' v-model="transport"  readonly label="Empresa Trasnporte"></v-text-field>
+                            <v-text-field color="main_green" box placeholder="Seleccionar" @click='toSearch' v-model="transport"  readonly label="Empresa Transporte"></v-text-field>
                         </v-flex>    
 
 

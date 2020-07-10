@@ -166,7 +166,7 @@
                     <v-layout v-if="this.$store.getters.type=='CentroAcopio' || this.$store.getters.type=='GeneradorIndustrial' || this.$store.getters.type=='DestinatarioFinal' ">
 
                         <v-flex xs3 class= "px-2">  
-                            <v-text-field color="main_green" box placeholder="Seleccionar" @click='toTransport' v-model="carriername"  readonly label="Empresa Trasnporte"></v-text-field>
+                            <v-text-field color="main_green" box placeholder="Seleccionar" @click='toTransport' v-model="carriername"  readonly label="Empresa Transporte"></v-text-field>
                         </v-flex>    
                         <v-flex xs3 class= "px-2">                  
                             <v-text-field readonly v-model="carrier_date" label="Fecha de Transporte"></v-text-field>
