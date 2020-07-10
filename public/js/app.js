@@ -5649,9 +5649,18 @@ __webpack_require__.r(__webpack_exports__);
         'declaration_id': this.declaration_edit.id,
         'status': 'RECHAZADA'
       };
+      var declaration_id = this.declaration_edit.id;
       axios.post('/api/declaration/changestatus', params).then(function (resp) {
         //alert(JSON.stringify(resp.data)); 
         _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$emit('changestatus', 'someValue');
+      })["catch"](function (resp) {
+        console.log(resp);
+      });
+      alert("Declaracion  :" + declaration_id);
+      alert('Envío de Correo ');
+      axios.get('/api/mail/sendrejectdeclaration/' + declaration_id).then(function (resp) {
+        alert(JSON.stringify(resp.data));
+        _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$emit('RejectDeclaration', 'someValue');
       })["catch"](function (resp) {
         console.log(resp);
       });
@@ -9860,7 +9869,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.redondeado {\n  border-radius: 5px;\n}\n.welcome_disclaimer {\n  text-align: justify;\n  padding-left: 4%;\n  padding-right: 4%;\n}\n.padded {\n  padding-left: 4%;\n  padding-right: 4%;\n}\n.welcome_icon {\n  min-width: 50px;\n  max-width: 150px;\n}\n.sitio_de_interes {\n  min-width: 40px;\n  max-width: 100px;\n  margin: auto;\n}\n", ""]);
+exports.push([module.i, "\n.redondeado {\r\n  border-radius: 5px;\n}\n.welcome_disclaimer {\r\n  text-align: justify;\r\n  padding-left: 4%;\r\n  padding-right: 4%;\n}\n.padded {\r\n  padding-left: 4%;\r\n  padding-right: 4%;\n}\n.welcome_icon {\r\n  min-width: 50px;\r\n  max-width: 150px;\n}\n.sitio_de_interes {\r\n  min-width: 40px;\r\n  max-width: 100px;\r\n  margin: auto;\n}\r\n", ""]);
 
 // exports
 
@@ -17033,7 +17042,7 @@ var render = function() {
           _c("router-link", { attrs: { to: { name: "home" } } }, [
             _vm._v("Home")
           ]),
-          _vm._v(" |\n            "),
+          _vm._v(" |\r\n            "),
           _c("router-link", { attrs: { to: { name: "hello" } } }, [
             _vm._v("Hello World")
           ])
@@ -17442,7 +17451,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    Nueva declaración\n                    "
+                            "\r\n                    Nueva declaración\r\n                    "
                           ),
                           _c("v-icon", { attrs: { right: "" } }, [
                             _vm._v("add")
@@ -17515,7 +17524,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                    Certificado        \n                "
+                                  "\r\n                    Certificado        \r\n                "
                                 )
                               ]
                             ),
@@ -18041,7 +18050,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                    Certificado        \n                "
+                                  "\r\n                    Certificado        \r\n                "
                                 )
                               ]
                             ),
@@ -19175,7 +19184,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    Exportar Excel\n                    "
+                            "\r\n                    Exportar Excel\r\n                    "
                           ),
                           _c("v-icon", { attrs: { right: "" } }, [
                             _vm._v("cloud_download")
@@ -19252,7 +19261,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "Desactivar\n                        "
+                                      "Desactivar\r\n                        "
                                     ),
                                     _c("v-icon", [_vm._v("close")])
                                   ],
@@ -19429,7 +19438,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    Exportar Excel\n                    "
+                            "\r\n                    Exportar Excel\r\n                    "
                           ),
                           _c("v-icon", { attrs: { right: "" } }, [
                             _vm._v("cloud_download")
@@ -19506,7 +19515,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "Desactivar\n                        "
+                                      "Desactivar\r\n                        "
                                     ),
                                     _c("v-icon", [_vm._v("close")])
                                   ],
@@ -19687,7 +19696,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    Exportar Excel\n                    "
+                            "\r\n                    Exportar Excel\r\n                    "
                           ),
                           _c("v-icon", { attrs: { right: "" } }, [
                             _vm._v("cloud_download")
@@ -19764,7 +19773,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "Desactivar\n                        "
+                                      "Desactivar\r\n                        "
                                     ),
                                     _c("v-icon", [_vm._v("close")])
                                   ],
@@ -19943,7 +19952,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    Exportar Excel\n                    "
+                            "\r\n                    Exportar Excel\r\n                    "
                           ),
                           _c("v-icon", { attrs: { right: "" } }, [
                             _vm._v("cloud_download")
@@ -20020,7 +20029,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "Desactivar\n                        "
+                                      "Desactivar\r\n                        "
                                     ),
                                     _c("v-icon", [_vm._v("close")])
                                   ],
@@ -66113,8 +66122,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/macbook/sinader/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/macbook/sinader/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Lenovo\Projects\sinader\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Lenovo\Projects\sinader\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

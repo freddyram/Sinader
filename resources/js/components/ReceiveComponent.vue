@@ -243,10 +243,25 @@
                 'status': 'RECHAZADA',
             }
 
+            var declaration_id = this.declaration_edit.id;
+
             axios.post('/api/declaration/changestatus', params)
                     .then(function (resp) {    
                         //alert(JSON.stringify(resp.data)); 
                         EventBus.$emit('changestatus', 'someValue');               
+                    })
+                    .catch(function (resp) {
+                        console.log(resp);
+                    }); 
+
+            alert("Declaracion  :" + declaration_id);
+
+            alert('Envío de Correo ')
+
+            axios.get('/api/mail/sendrejectdeclaration/'+declaration_id)
+                    .then(function (resp) {    
+                        alert(JSON.stringify(resp.data)); 
+                        EventBus.$emit('RejectDeclaration', 'someValue');               
                     })
                     .catch(function (resp) {
                         console.log(resp);
