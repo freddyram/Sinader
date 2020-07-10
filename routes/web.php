@@ -29,5 +29,6 @@ Route::get('{any}', function () {
 })->where('any','.*');
 
 Route::get('/import', 'MonthWasteController@import');
+Route::get('/mail/sendRejectDeclaration/{declaration_id}', 'MailController@emailRejectedDeclaration');
 
 
