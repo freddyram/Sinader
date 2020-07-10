@@ -28,6 +28,6 @@ class SendRegionalManager extends Mailable
      */
     public function build()
     {
-        return $this->view('view.mails.SendRegionalManager');
+        return $this->view('mails.MailRegionalManager');
     }
 }

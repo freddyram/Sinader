@@ -416,10 +416,20 @@ class DeclarationController extends Controller
 
     public function pdf($id)
     {        
+
+        Info("*****Path*****");
+        Info(storage_path());
+
         $declaration = Declaration::where('id',$id)->get()->first();
         $waste_detail= WasteDetail::where('declaration_id',$declaration->id)->get();        
+        $archivo_pdf = 'declaration_'.$id.'.pdf';
 
         $pdf = PDF::loadView('certificado', compact('declaration','waste_detail'));
+
+        Info($archivo_pdf);
+
+        $pdf->save(storage_path() . $archivo_pdf);
+
         return $pdf->stream('certificado');
 
     }

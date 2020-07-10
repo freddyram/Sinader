@@ -31,6 +31,8 @@ class SendRejectDeclaration extends Mailable
      */
     public function build()
     {
-        return $this->subject('Declaración Rechazada')->view('mails.MailRejectDeclaration');
+        return $this->subject('Declaración Rechazada')
+                    ->view('mails.MailRejectDeclaration')
+                    ->text('text.MailRejectDeclaration');
     }
 }

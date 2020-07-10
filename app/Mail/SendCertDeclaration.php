@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendCertRecDeclaration extends Mailable
+class SendCertIndDeclaration extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,9 +16,13 @@ class SendCertRecDeclaration extends Mailable
      *
      * @return void
      */
+
+    public $objSend;
+
     public function __construct()
     {
         //
+        $this->objSend = $objSend
     }
 
     /**
@@ -28,6 +32,8 @@ class SendCertRecDeclaration extends Mailable
      */
     public function build()
     {
-        return $this->view('view.mails.SendCertRecDeclaration');
-    }
+        return $this->subject('Certificado de Declaración')
+                    ->view('mails.MailCertDeclaration')
+                    ->text('text.MailCertDeclaration')
+                    ->attach($objSend->zip_file);
 }
