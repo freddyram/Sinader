@@ -428,7 +428,7 @@ class DeclarationController extends Controller
 
         Info($archivo_pdf);
 
-        $pdf->save(storage_path() . $archivo_pdf);
+        $pdf->save(storage_path() . '/' .$archivo_pdf);
 
         return $pdf->stream('certificado');
 
