@@ -3092,7 +3092,7 @@ __webpack_require__.r(__webpack_exports__);
         axios.post('/api/declaration/store', {
           declaration: declaration
         }).then(function (resp) {
-          _eventbus2_js__WEBPACK_IMPORTED_MODULE_3__["EventBus2"].$emit('saveDeclaration', 'someValue');
+          _eventbus2_js__WEBPACK_IMPORTED_MODULE_3__["EventBus2"].$emit('save', 'someValue');
           app.dialog = false;
           _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$off();
         })["catch"](function (resp) {

@@ -406,7 +406,7 @@
 
                 axios.post('/api/declaration/store', {declaration: declaration})
                     .then(function (resp) {    
-                        EventBus2.$emit('saveDeclaration', 'someValue');
+                        EventBus2.$emit('save', 'someValue');
                         app.dialog = false;
                         EventBus.$off();
                     })
