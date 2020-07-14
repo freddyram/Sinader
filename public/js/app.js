@@ -2320,9 +2320,17 @@ __webpack_require__.r(__webpack_exports__);
         return v && /^[0-9]+$/.test(v) || 'Debe ser valor numérico';
       }],
       semanalRule: [function (v) {
+        return !!v || 'Campo requerido';
+      }, function (v) {
+        return v && /^[0-9]+$/.test(v) || 'Debe ser valor numérico';
+      }, function (v) {
         return v <= 7 || 'Valor excede el máximo';
       }],
       porcentRule: [function (v) {
+        return !!v || 'Campo requerido';
+      }, function (v) {
+        return v && /^[0-9]+$/.test(v) || 'Debe ser valor numérico';
+      }, function (v) {
         return v <= 100 || 'Valor excede el máximo';
       }],
       dialog: true,
@@ -12007,7 +12015,7 @@ var render = function() {
                             [
                               _c("v-text-field", {
                                 attrs: {
-                                  rules: [_vm.numberRule, _vm.porcentRule],
+                                  rules: _vm.porcentRule,
                                   label: "Urbana %"
                                 },
                                 model: {
@@ -12028,7 +12036,7 @@ var render = function() {
                             [
                               _c("v-text-field", {
                                 attrs: {
-                                  rules: [_vm.numberRule, _vm.porcentRule],
+                                  rules: _vm.porcentRule,
                                   label: "Rural %"
                                 },
                                 model: {
@@ -12059,7 +12067,7 @@ var render = function() {
                             [
                               _c("v-text-field", {
                                 attrs: {
-                                  rules: [_vm.numberRule, _vm.semanalRule],
+                                  rules: _vm.semanalRule,
                                   label: "Zona Urbana"
                                 },
                                 model: {
@@ -12080,7 +12088,7 @@ var render = function() {
                             [
                               _c("v-text-field", {
                                 attrs: {
-                                  rules: [_vm.numberRule, _vm.semanalRule],
+                                  rules: _vm.semanalRule,
                                   label: "Zona Rural"
                                 },
                                 model: {

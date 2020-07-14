@@ -130,19 +130,19 @@
                         </v-flex>
                         
                         <v-flex xs2 class="px-1">
-                            <v-text-field v-model='cobertura_urbana' :rules= '[numberRule, porcentRule]' label="Urbana %"></v-text-field>
+                            <v-text-field v-model='cobertura_urbana' :rules= 'porcentRule' label="Urbana %"></v-text-field>
                         </v-flex>
                         <v-flex xs2 class="px-1">
-                            <v-text-field v-model='cobertura_rural' :rules= '[numberRule, porcentRule]' label="Rural %"></v-text-field>
+                            <v-text-field v-model='cobertura_rural' :rules= 'porcentRule' label="Rural %"></v-text-field>
                         </v-flex>
                         <v-flex xs2 class="px-1">
                             <h5>Frecuencia recolección Días por semana</h5>
                         </v-flex>
                         <v-flex xs2 class="px-1">
-                            <v-text-field v-model='frecuencia_Urbana' :rules= '[numberRule, semanalRule]' label="Zona Urbana"></v-text-field>
+                            <v-text-field v-model='frecuencia_Urbana' :rules= 'semanalRule' label="Zona Urbana"></v-text-field>
                         </v-flex>
                         <v-flex xs2 class="px-1">
-                            <v-text-field v-model='frecuencia_Rural' :rules= '[numberRule, semanalRule]' label="Zona Rural"></v-text-field>
+                            <v-text-field v-model='frecuencia_Rural' :rules= 'semanalRule' label="Zona Rural"></v-text-field>
                         </v-flex>
                     </v-layout>
                     <v-layout>   
@@ -278,8 +278,8 @@
 
         numberRule: [v => !!v || 'Campo requerido', v => v && /^[0-9]+$/.test(v) || 'Debe ser valor numérico',],
 
-        semanalRule: [(v) => v<=7 || 'Valor excede el máximo'],
-        porcentRule: [(v) => v<=100 || 'Valor excede el máximo'],
+        semanalRule: [v => !!v || 'Campo requerido', v => v && /^[0-9]+$/.test(v) || 'Debe ser valor numérico',(v) => v<=7 || 'Valor excede el máximo'],
+        porcentRule: [v => !!v || 'Campo requerido', v => v && /^[0-9]+$/.test(v) || 'Debe ser valor numérico',(v) => v<=100 || 'Valor excede el máximo'],
 
         dialog: true,
         notifications: false,
