@@ -291,7 +291,7 @@
         
 
         this.initialize();
-        EventBus.$once('saveCarrier', function(){  
+        EventBus.$on('saveCarrier', function(){  
             app.refreshCarrier();
         });
         EventBus.$once('selectReceiver', function(){ 

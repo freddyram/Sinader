@@ -179,12 +179,12 @@
     created(){
         var app = this;
         this.initialize();
-        EventBus.$once('selectCarrier', function(){  
+        EventBus.$on('selectCarrier', function(){  
             app.refreshCarrier();
         });
 
 
-        EventBus.$once('saveTransport', function(){  
+        EventBus.$on('saveTransport', function(){  
             app.refreshCarrierNotReg();
         });
 

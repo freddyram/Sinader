@@ -3435,7 +3435,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var app = this;
     this.initialize();
-    _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$once('saveCarrier', function () {
+    _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$on('saveCarrier', function () {
       app.refreshCarrier();
     });
     _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$once('selectReceiver', function () {
@@ -3989,7 +3989,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var app = this;
     this.initialize();
-    _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$once('saveCarrier', function () {
+    _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$on('saveCarrier', function () {
       app.refreshCarrier();
     });
     _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$once('selectReceiver', function () {
@@ -6396,10 +6396,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     var app = this;
     this.initialize();
-    _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$once('selectCarrier', function () {
+    _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$on('selectCarrier', function () {
       app.refreshCarrier();
     });
-    _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$once('saveTransport', function () {
+    _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$on('saveTransport', function () {
       app.refreshCarrierNotReg();
     });
   },
@@ -8454,7 +8454,7 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Id',
         value: ''
       }, {
-        text: 'Establesimiento',
+        text: 'Establecimiento',
         value: ''
       }, {
         text: 'Comuna',
@@ -8691,7 +8691,7 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Id',
         value: ''
       }, {
-        text: 'Establesimiento',
+        text: 'Establecimiento',
         value: ''
       }, {
         text: 'Comuna',
@@ -8929,7 +8929,7 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Id',
         value: ''
       }, {
-        text: 'Establesimiento',
+        text: 'Establecimiento',
         value: ''
       }, {
         text: 'Comuna',
@@ -9169,7 +9169,7 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Id',
         value: ''
       }, {
-        text: 'Establesimiento',
+        text: 'Establecimiento',
         value: ''
       }, {
         text: 'Comuna',
