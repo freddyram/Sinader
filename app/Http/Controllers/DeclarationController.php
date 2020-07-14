@@ -17,6 +17,7 @@ use App\Vehicle;
 use App\LerWaste;
 use App\LerSubChapter;
 use App\LerChapter;
+use App\SubdereCost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Imports\MonthWasteImport;
@@ -177,11 +178,38 @@ class DeclarationController extends Controller
         if ($declarationNew->save() ){
             WasteDetail::where('declaration_id', $declarationNew->id)->delete();
             $this->storeDetail($declaration['waste_detail'], $declarationNew->id, 0);
+
+            SubdereCost::where('declaration_id', $declarationNew->id)->delete();
+            $this->storeCosts($declaration['costs'], $declarationNew->id);
         }
 
         return response()->json($declarationNew);
     }
 
+    public function storeCosts($cost, $declaration_id){
+
+      
+            $new_cost = new SubdereCost();
+            Info("******** costos *********");
+            Info($cost);
+            Info($cost['cobertura_urbana']);
+
+            $new_cost->declaration_id   = $declaration_id;
+            $new_cost->cobertura_urbana            = $cost['cobertura_urbana'] ;
+            $new_cost->cobertura_rural             = $cost['cobertura_rural'];
+            $new_cost->frecuencia_Urbana           = $cost['frecuencia_Urbana'];
+            $new_cost->frecuencia_Rural            = $cost['frecuencia_Rural'];
+            $new_cost->costo_recol_transp          = $cost['costo_recol_transp'];
+            $new_cost->costo_tonelada_recol        = $cost['costo_tonelada_recol'];
+            $new_cost->costo_disp_final            = $cost['costo_disp_final'];
+            $new_cost->costo_tonelada_disp         = $cost['costo_tonelada_disp'];
+            $new_cost->recaudacion_derecho_aseo    = $cost['recaudacion_derecho_aseo'];
+
+            $new_cost->save();
+      
+
+
+    }
 
     public function storeDetail($residues, $declaration_id, $declaration_origin_id){
 

@@ -130,36 +130,37 @@
                         </v-flex>
                         
                         <v-flex xs2 class="px-1">
-                            <v-text-field  label="Urbana %"></v-text-field>
+                            <v-text-field v-model='cobertura_urbana' :rules= '[numberRule, porcentRule]' label="Urbana %"></v-text-field>
                         </v-flex>
                         <v-flex xs2 class="px-1">
-                            <v-text-field  label="Rural %"></v-text-field>
+                            <v-text-field v-model='cobertura_rural' :rules= '[numberRule, porcentRule]' label="Rural %"></v-text-field>
                         </v-flex>
                         <v-flex xs2 class="px-1">
                             <h5>Frecuencia recolección Días por semana</h5>
                         </v-flex>
                         <v-flex xs2 class="px-1">
-                            <v-text-field  label="Zona Urbana"></v-text-field>
+                            <v-text-field v-model='frecuencia_Urbana' :rules= '[numberRule, semanalRule]' label="Zona Urbana"></v-text-field>
                         </v-flex>
                         <v-flex xs2 class="px-1">
-                            <v-text-field  label="Zona Rural"></v-text-field>
+                            <v-text-field v-model='frecuencia_Rural' :rules= '[numberRule, semanalRule]' label="Zona Rural"></v-text-field>
                         </v-flex>
                     </v-layout>
                     <v-layout>   
                         <v-flex xs1 class="px-1">
                             <h5>Costos</h5>
                         </v-flex>
+
                         <v-flex xs3 class="px-1">
-                            <v-text-field  label="Recolección y transporte $/año"></v-text-field>
+                            <v-text-field v-model='costo_recol_transp' :rules= 'numberRule' label="Recolección y transporte $/año"></v-text-field>
                         </v-flex>
                         <v-flex xs3 class="px-1">
-                            <v-text-field  label="Tonelada recolectada $/tonelada "></v-text-field>
+                            <v-text-field v-model='costo_tonelada_recol' :rules= 'numberRule' label="Tonelada recolectada $/tonelada "></v-text-field>
                         </v-flex>
                         <v-flex xs3 class="px-1">
-                            <v-text-field  label="Disposición final $/año "></v-text-field>
+                            <v-text-field v-model='costo_disp_final' :rules= 'numberRule' label="Disposición final $/año "></v-text-field>
                         </v-flex>
                         <v-flex xs3 class="px-1">
-                            <v-text-field  label="Tonelada dispuesta $/tonelada"></v-text-field>
+                            <v-text-field v-model='costo_tonelada_disp' :rules= 'numberRule' label="Tonelada dispuesta $/tonelada"></v-text-field>
                         </v-flex>
                     </v-layout>
                     <v-layout> 
@@ -168,7 +169,7 @@
                             <h5>Recaudación</h5>
                         </v-flex>
                         <v-flex xs4 class="px-1">
-                            <v-text-field  label="Por derecho de aseo $/año"></v-text-field>
+                            <v-text-field v-model='recaudacion_derecho_aseo' :rules= 'numberRule' label="Por derecho de aseo $/año"></v-text-field>
                         </v-flex>
                     </v-layout>
                 </v-card>
@@ -274,6 +275,12 @@
     },
     data () {
       return {
+
+        numberRule: [v => !!v || 'Campo requerido', v => v && /^[0-9]+$/.test(v) || 'Debe ser valor numérico',],
+
+        semanalRule: [(v) => v<=7 || 'Valor excede el máximo'],
+        porcentRule: [(v) => v<=100 || 'Valor excede el máximo'],
+
         dialog: true,
         notifications: false,
 
@@ -293,6 +300,16 @@
         address:'',
         commune:'',
         region:'',
+
+        cobertura_urbana: 0,
+        cobertura_rural: 0,
+        frecuencia_Urbana: 0,
+        frecuencia_Rural: 0,
+        costo_recol_transp: 0,
+        costo_tonelada_recol: 0,
+        costo_disp_final: 0,
+        costo_tonelada_disp: 0,
+        recaudacion_derecho_aseo: 0,
 
 
         headers: [
@@ -344,7 +361,25 @@
 
                 // alert('edit');
                 app.declaration = app.declaration_edit;
-                app.correlative = app.declaration_edit.correlative + '-' + app.declaration_edit.correlative_dv;     
+                app.correlative = app.declaration_edit.correlative + '-' + app.declaration_edit.correlative_dv;  
+
+
+                axios.get('/api/subdere_cost/forid/'+app.declaration.id)
+                    .then(function (resp) {    
+                        app.cobertura_urbana = resp.data.cobertura_urbana ;       
+                        app.cobertura_rural = resp.data.cobertura_rural ;
+                        app.frecuencia_Urbana = resp.data.frecuencia_Urbana;
+                        app.frecuencia_Rural = resp.data.frecuencia_Rural;
+                        app.costo_recol_transp = resp.data.costo_recol_transp;
+                        app.costo_tonelada_recol = resp.data.costo_tonelada_recol;
+                        app.costo_disp_final = resp.data.costo_disp_final;
+                        app.costo_tonelada_disp = resp.data.costo_tonelada_disp;
+                        app.recaudacion_derecho_aseo = resp.data.recaudacion_derecho_aseo;
+                    })
+                    .catch(function (resp) {
+                        console.log(resp);
+                    });
+
 
                 axios.get('/api/waste_details/'+app.declaration.id)
                     .then(function (resp) {    
@@ -371,6 +406,18 @@
         createdeclaration(){
             var app = this;
 
+            var costs = {
+                cobertura_urbana: this.cobertura_urbana,
+                cobertura_rural: this.cobertura_rural,
+                frecuencia_Urbana: this.frecuencia_Urbana,
+                frecuencia_Rural: this.frecuencia_Rural,
+                costo_recol_transp: this.costo_recol_transp,
+                costo_tonelada_recol: this.costo_tonelada_recol,
+                costo_disp_final: this.costo_disp_final,
+                costo_tonelada_disp: this.costo_tonelada_disp,
+                recaudacion_derecho_aseo: this.recaudacion_derecho_aseo,
+            }
+
             var declaration = {
                 correlative: this.declaration.correlative,
                 correlative_dv: this.declaration.correlative_dv,
@@ -384,6 +431,7 @@
                 period: this.period,
                 generator:'REGISTERED',
                 carrier: 0,
+                costs: costs,
                 waste_detail: this.residues,
             }
 

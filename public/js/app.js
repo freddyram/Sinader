@@ -2299,6 +2299,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2313,6 +2314,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      numberRule: [function (v) {
+        return !!v || 'Campo requerido';
+      }, function (v) {
+        return v && /^[0-9]+$/.test(v) || 'Debe ser valor numérico';
+      }],
+      semanalRule: [function (v) {
+        return v <= 7 || 'Valor excede el máximo';
+      }],
+      porcentRule: [function (v) {
+        return v <= 100 || 'Valor excede el máximo';
+      }],
       dialog: true,
       notifications: false,
       type: 'D.S.N°1/2013 MMA (Mensual)',
@@ -2327,6 +2339,15 @@ __webpack_require__.r(__webpack_exports__);
       address: '',
       commune: '',
       region: '',
+      cobertura_urbana: 0,
+      cobertura_rural: 0,
+      frecuencia_Urbana: 0,
+      frecuencia_Rural: 0,
+      costo_recol_transp: 0,
+      costo_tonelada_recol: 0,
+      costo_disp_final: 0,
+      costo_tonelada_disp: 0,
+      recaudacion_derecho_aseo: 0,
       headers: [{
         text: 'Descripción del Residuo',
         value: ''
@@ -2375,6 +2396,19 @@ __webpack_require__.r(__webpack_exports__);
         // alert('edit');
         app.declaration = app.declaration_edit;
         app.correlative = app.declaration_edit.correlative + '-' + app.declaration_edit.correlative_dv;
+        axios.get('/api/subdere_cost/forid/' + app.declaration.id).then(function (resp) {
+          app.cobertura_urbana = resp.data.cobertura_urbana;
+          app.cobertura_rural = resp.data.cobertura_rural;
+          app.frecuencia_Urbana = resp.data.frecuencia_Urbana;
+          app.frecuencia_Rural = resp.data.frecuencia_Rural;
+          app.costo_recol_transp = resp.data.costo_recol_transp;
+          app.costo_tonelada_recol = resp.data.costo_tonelada_recol;
+          app.costo_disp_final = resp.data.costo_disp_final;
+          app.costo_tonelada_disp = resp.data.costo_tonelada_disp;
+          app.recaudacion_derecho_aseo = resp.data.recaudacion_derecho_aseo;
+        })["catch"](function (resp) {
+          console.log(resp);
+        });
         axios.get('/api/waste_details/' + app.declaration.id).then(function (resp) {
           app.residues = resp.data;
         })["catch"](function (resp) {
@@ -2392,6 +2426,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     createdeclaration: function createdeclaration() {
       var app = this;
+      var costs = {
+        cobertura_urbana: this.cobertura_urbana,
+        cobertura_rural: this.cobertura_rural,
+        frecuencia_Urbana: this.frecuencia_Urbana,
+        frecuencia_Rural: this.frecuencia_Rural,
+        costo_recol_transp: this.costo_recol_transp,
+        costo_tonelada_recol: this.costo_tonelada_recol,
+        costo_disp_final: this.costo_disp_final,
+        costo_tonelada_disp: this.costo_tonelada_disp,
+        recaudacion_derecho_aseo: this.recaudacion_derecho_aseo
+      };
       var declaration = {
         correlative: this.declaration.correlative,
         correlative_dv: this.declaration.correlative_dv,
@@ -2405,6 +2450,7 @@ __webpack_require__.r(__webpack_exports__);
         period: this.period,
         generator: 'REGISTERED',
         carrier: 0,
+        costs: costs,
         waste_detail: this.residues
       };
 
@@ -11960,7 +12006,17 @@ var render = function() {
                             { staticClass: "px-1", attrs: { xs2: "" } },
                             [
                               _c("v-text-field", {
-                                attrs: { label: "Urbana %" }
+                                attrs: {
+                                  rules: [_vm.numberRule, _vm.porcentRule],
+                                  label: "Urbana %"
+                                },
+                                model: {
+                                  value: _vm.cobertura_urbana,
+                                  callback: function($$v) {
+                                    _vm.cobertura_urbana = $$v
+                                  },
+                                  expression: "cobertura_urbana"
+                                }
                               })
                             ],
                             1
@@ -11971,7 +12027,17 @@ var render = function() {
                             { staticClass: "px-1", attrs: { xs2: "" } },
                             [
                               _c("v-text-field", {
-                                attrs: { label: "Rural %" }
+                                attrs: {
+                                  rules: [_vm.numberRule, _vm.porcentRule],
+                                  label: "Rural %"
+                                },
+                                model: {
+                                  value: _vm.cobertura_rural,
+                                  callback: function($$v) {
+                                    _vm.cobertura_rural = $$v
+                                  },
+                                  expression: "cobertura_rural"
+                                }
                               })
                             ],
                             1
@@ -11992,7 +12058,17 @@ var render = function() {
                             { staticClass: "px-1", attrs: { xs2: "" } },
                             [
                               _c("v-text-field", {
-                                attrs: { label: "Zona Urbana" }
+                                attrs: {
+                                  rules: [_vm.numberRule, _vm.semanalRule],
+                                  label: "Zona Urbana"
+                                },
+                                model: {
+                                  value: _vm.frecuencia_Urbana,
+                                  callback: function($$v) {
+                                    _vm.frecuencia_Urbana = $$v
+                                  },
+                                  expression: "frecuencia_Urbana"
+                                }
                               })
                             ],
                             1
@@ -12003,7 +12079,17 @@ var render = function() {
                             { staticClass: "px-1", attrs: { xs2: "" } },
                             [
                               _c("v-text-field", {
-                                attrs: { label: "Zona Rural" }
+                                attrs: {
+                                  rules: [_vm.numberRule, _vm.semanalRule],
+                                  label: "Zona Rural"
+                                },
+                                model: {
+                                  value: _vm.frecuencia_Rural,
+                                  callback: function($$v) {
+                                    _vm.frecuencia_Rural = $$v
+                                  },
+                                  expression: "frecuencia_Rural"
+                                }
                               })
                             ],
                             1
@@ -12027,7 +12113,15 @@ var render = function() {
                             [
                               _c("v-text-field", {
                                 attrs: {
+                                  rules: _vm.numberRule,
                                   label: "Recolección y transporte $/año"
+                                },
+                                model: {
+                                  value: _vm.costo_recol_transp,
+                                  callback: function($$v) {
+                                    _vm.costo_recol_transp = $$v
+                                  },
+                                  expression: "costo_recol_transp"
                                 }
                               })
                             ],
@@ -12040,7 +12134,15 @@ var render = function() {
                             [
                               _c("v-text-field", {
                                 attrs: {
+                                  rules: _vm.numberRule,
                                   label: "Tonelada recolectada $/tonelada "
+                                },
+                                model: {
+                                  value: _vm.costo_tonelada_recol,
+                                  callback: function($$v) {
+                                    _vm.costo_tonelada_recol = $$v
+                                  },
+                                  expression: "costo_tonelada_recol"
                                 }
                               })
                             ],
@@ -12052,7 +12154,17 @@ var render = function() {
                             { staticClass: "px-1", attrs: { xs3: "" } },
                             [
                               _c("v-text-field", {
-                                attrs: { label: "Disposición final $/año " }
+                                attrs: {
+                                  rules: _vm.numberRule,
+                                  label: "Disposición final $/año "
+                                },
+                                model: {
+                                  value: _vm.costo_disp_final,
+                                  callback: function($$v) {
+                                    _vm.costo_disp_final = $$v
+                                  },
+                                  expression: "costo_disp_final"
+                                }
                               })
                             ],
                             1
@@ -12064,7 +12176,15 @@ var render = function() {
                             [
                               _c("v-text-field", {
                                 attrs: {
+                                  rules: _vm.numberRule,
                                   label: "Tonelada dispuesta $/tonelada"
+                                },
+                                model: {
+                                  value: _vm.costo_tonelada_disp,
+                                  callback: function($$v) {
+                                    _vm.costo_tonelada_disp = $$v
+                                  },
+                                  expression: "costo_tonelada_disp"
                                 }
                               })
                             ],
@@ -12088,7 +12208,17 @@ var render = function() {
                             { staticClass: "px-1", attrs: { xs4: "" } },
                             [
                               _c("v-text-field", {
-                                attrs: { label: "Por derecho de aseo $/año" }
+                                attrs: {
+                                  rules: _vm.numberRule,
+                                  label: "Por derecho de aseo $/año"
+                                },
+                                model: {
+                                  value: _vm.recaudacion_derecho_aseo,
+                                  callback: function($$v) {
+                                    _vm.recaudacion_derecho_aseo = $$v
+                                  },
+                                  expression: "recaudacion_derecho_aseo"
+                                }
                               })
                             ],
                             1
@@ -63808,14 +63938,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************************!*\
   !*** ./resources/js/components/DeclarationComponent.vue ***!
   \**********************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DeclarationComponent_vue_vue_type_template_id_0520b80e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeclarationComponent.vue?vue&type=template&id=0520b80e& */ "./resources/js/components/DeclarationComponent.vue?vue&type=template&id=0520b80e&");
 /* harmony import */ var _DeclarationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeclarationComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/DeclarationComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _DeclarationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _DeclarationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -63845,7 +63976,7 @@ component.options.__file = "resources/js/components/DeclarationComponent.vue"
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/DeclarationComponent.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

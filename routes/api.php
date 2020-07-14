@@ -97,6 +97,8 @@ Route::middleware('auth:api')->group(function () {
 	Route::get('/countries', 'CountryController@index');
 	Route::get('/country/forid/{id}', 'CountryController@forid');
 
+	Route::get('/subdere_cost/forid/{declaration_id}', 'SubdereCostController@forid');
+
 
     Route::get('/declarations', 'DeclarationController@index');
     Route::get('/declarations/admin', 'DeclarationController@indexAdmin');
