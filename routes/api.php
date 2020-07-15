@@ -117,6 +117,7 @@ Route::middleware('auth:api')->group(function () {
 	Route::post('/declaration/changestatus','DeclarationController@changeStatus');
 
 	Route::post('/declaration/upload','DeclarationController@upload');
+	Route::get('/declaration/export', 'DeclarationController@export');
 
 
 	Route::get('/notification/mail','UserController@sendMail');

@@ -33,6 +33,15 @@
                   <v-text-field v-model="editedItem.name" label="Nombre"></v-text-field>
                   <v-text-field v-model="editedItem.address" label="Dirección">
                   </v-text-field>
+                  <v-select
+                    v-model="editedItem.establishment_id"
+                    label="Establecimiento"  
+                    :items="establishment"
+                    item-text="name"
+                    item-value="id"
+                    readonly=true
+                    return-object
+                  ></v-select>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -95,6 +104,7 @@
         },
         { text: 'Nombre', value: 'name' },
         { text: 'Dirección', value: 'address' },
+        { text: 'Establecimiento', value: 'establishment_id' },
         { text: 'Acciones', value: 'actions' },
       ],
       carriers: [],
@@ -103,13 +113,15 @@
         rut: 0,
         dv: '',
         name: '',
-        address: ''
+        address: '',
+        establishment_id: ''
       },
       defaultItem: {
         rut: 0,
         dv: '',
         name: '',
-        address: ''
+        address: '',
+        establishment_id: ''
       }
     }),
     computed: {
@@ -125,6 +137,7 @@
     created () {
       this.initialize()
       this.getcarriers();
+      this.getestablishment();
     },
     methods: {
       initialize () {
