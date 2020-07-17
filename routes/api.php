@@ -157,6 +157,10 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/activeline', 'ActiveLineController@index');
 	Route::post('/activeline/data', 'ActiveLineController@data');
 
+	Route::get('/period', 'PeriodController@index');
+	Route::post('/period/store', 'PeriodController@store');
+	Route::post('/period/delete/{id}', 'PeriodController@delete');
+
  	Route::get('/mail/sendrejectdeclaration/{declaration_id}', 'MailController@emailRejectedDeclaration');
 
 });

@@ -196,7 +196,7 @@
                             { icon: 'declaration', text: 'Mantenedor de códigos LER Capitulos', link: '/lerchapteradmin' },
                             { icon: 'declaration', text: 'Mantenedor de códigos LER Subcapitulos', link: '/lersubchapteradmin' },
                             { icon: 'declaration', text: 'Mantenedor de códigos LER Residuo', link: '/lerwasteadmin' },
-                            { icon: 'declaration', text: 'Mantenedor de Periodos de declaración', link: '/declarationsperiodadmin' },
+                            { icon: 'declaration', text: 'Mantenedor de Periodos de declaración', link: '/periodsadmin' },
                             { icon: 'declaration', text: 'Reportes', link: '/' },
 
                         ]

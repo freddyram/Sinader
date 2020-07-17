@@ -45,6 +45,8 @@
               :headers="headers"
               :items="declarations"
               class="elevation-1"
+              :rows-per-page-items="rowsPerPageItems"
+              :pagination.sync="pagination"
               
             >
               <template v-slot:items="props">
@@ -114,7 +116,13 @@
         
         ],
         declarations: [
-        ]
+        ],
+
+        rowsPerPageItems: [5, 10, 20, 40],
+        pagination: {
+            rowsPerPage: 40
+        },  
+
 
         }),
     

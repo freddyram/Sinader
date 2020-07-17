@@ -16,7 +16,7 @@ import VehicleAdmin    from './views/VehicleAdmin'
 import LerChapterAdmin from './views/LerChapterAdmin'
 import LerSubChapterAdmin from './views/LerSubChapterAdmin'
 import LerWasteAdmin    from './views/LerWasteAdmin'
-import DeclarationPeriodsAdmin  from './views/DeclarationPeriodsAdmin'
+import PeriodsAdmin  from './views/PeriodsAdmin'
 
 
 Vue.use(VueRouter);
@@ -104,9 +104,9 @@ const router = new VueRouter({
             component: LerWasteAdmin,
         },
         {
-            path: '/declarationperiodsadmin',
-            name: 'declarationperiodsadmin',
-            component: DeclarationPeriodsAdmin,
+            path: '/periodsadmin',
+            name: 'periodsadmin',
+            component: PeriodsAdmin,
         },
 
 

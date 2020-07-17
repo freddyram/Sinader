@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-toolbar dark color="main_green">
-      <v-toolbar-title>Vehiculos</v-toolbar-title>
+      <v-toolbar-title>Periodos</v-toolbar-title>
       <v-divider
         class="mx-2"
         inset
@@ -10,7 +10,7 @@
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on }">
-          <v-btn color="primary" dark class="mb-2" v-on="on">Nuevo Registro</v-btn>
+          <v-btn color="secondary-green" dark class="mb-2" v-on="on">Nuevo Registro</v-btn>
         </template>
         <v-card>
           <v-card-title>
@@ -22,11 +22,8 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.name" label="Nombre Vehículo"></v-text-field>
-                  <v-text-field v-model="editedItem.plate" label="Patente"></v-text-field>
-                  <v-text-field v-model="editedItem.carrier_id" label="Transportista"></v-text-field>
-                  <v-text-field v-model="editedItem.vehicle_type_id" label="Tipo de Vehículo">
-                  </v-text-field>
+                  <v-text-field v-model="editedItem.year" label="Año"></v-text-field>
+                  <v-text-field v-model="editedItem.month" label="Mes"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -42,14 +39,12 @@
     </v-toolbar>
     <v-data-table
       :headers="headers"
-      :items="vehicles"
+      :items="periods"
       class="elevation-1"
     >
       <template v-slot:items="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.plate }}</td>
-        <td class="text-xs-right">{{ props.item.carrier_id }}</td>
-        <td class="text-xs-right">{{ props.item.vehicle_type_id }}</td>
+        <td>{{ props.item.year }}</td>
+        <td class="text-xs-right">{{ props.item.month }}</td>
         <td  class="justify-center layout px-0">
 
             <v-btn icon  @click="edit_item(props.item)" >
@@ -81,29 +76,24 @@
       dialog: false,
       headers: [
         {
-          text: 'Vehículo',
+          text: 'Periodos',
           align: 'left',
           sortable: false,
           value: 'name'
         },
-        { text: 'Patente', value: 'plate' },
-        { text: 'Transportista', value: 'carrier_id' },
-        { text: 'Tipo de Vehículo', value: 'vehicle_type_id' },
+        { text: 'Año', value: 'year' },
+        { text: 'Mes', value: 'month' },
         { text: 'Acciones', value: 'actions' },
       ],
-      vehicles: [],
+      period: [],
       editedIndex: -1,
       editedItem: {
-        name: '',
-        plate: 0,
-        carrier_id: 0,
-        vehicle_type_id: 0
+        year: 0,
+        month: 0
       },
       defaultItem: {
-        name: '',
-        plate: 0,
-        carrier_id: 0,
-        vehicle_type_id: 0
+        year: 0,
+        month: 0
       }
     }),
 
@@ -121,7 +111,7 @@
 
     created () {
       this.initialize()
-      this.getvehicles();
+      this.getperiods();
     },
 
     methods: {
@@ -129,21 +119,21 @@
         this.vehicles = []
       },
 
-      getvehicles(){
+      getperiods(){
           var app = this;
-          axios.get('/api/vehicle')
+          axios.get('/api/period')
               .then(function (resp) {
                   console.log(resp.data);    
-                  app.vehicles = resp.data;
+                  app.period = resp.data;
               })
               .catch(function (resp) {
                   console.log(resp);
-                  alert("Error vehicle/index :" + resp);
+                  alert("Error period/index :" + resp);
               });
       },
 
       edit_item (item) {
-        this.editedIndex = this.vehicles.indexOf(item)
+        this.editedIndex = this.periods.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
@@ -151,18 +141,18 @@
 
       delete_item(item){
         var app = this;
-        const index = this.vehicles.indexOf(item)
+        const index = this.periods.indexOf(item)
 
-        const vehicleid = this.vehicles[index]["id"];
+        const periodid = this.periods[index]["id"];
         
-        alert(this.vehicles[index]["id"]);
+        alert(this.periods[index]["id"]);
 
 
         if (confirm('¿Está seguro de eliminar el registro?')){
           
-          axios.post('/api/vehicle/delete/'+vehicleid)
+          axios.post('/api/period/delete/'+periodid)
               .then(function (resp) {  
-                  app.vehicles.splice(index, 1)
+                  app.periods.splice(index, 1)
               })
               .catch(function (resp) {
                   console.log(resp);
@@ -186,7 +176,7 @@
         var app = this;
 
         if (this.editedIndex > -1) {
-          Object.assign(this.vehicles[this.editedIndex], this.editedItem)
+          Object.assign(this.periods[this.editedIndex], this.editedItem)
         } 
         //else {
         //  this.vehicles.push(this.editedItem)
@@ -194,15 +184,16 @@
         
         var vehicle = this.editedItem;
          
-        axios.post('/api/vehicle/store', {vehicle: vehicle})
+        axios.post('/api/period/store', {vehicle: vehicle})
             .then(function (resp) {    
                 alert('Registro Grabado Correctamente!!');
-                app.vehicles.push(resp.data);
-                EventBus.$emit('saveVehicle', 'someValue');
+                //app.vehicles.push(resp.data);
+                app.getperiods();
+                EventBus.$emit('savePeriods', 'someValue');
             })
             .catch(function (resp) {
                 console.log(resp);
-                alert("Error vehicle/store :" + resp);
+                alert("Error period/store :" + resp);
             });
         this.close()
       }
