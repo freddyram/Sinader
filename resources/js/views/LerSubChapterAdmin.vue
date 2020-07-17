@@ -45,7 +45,7 @@
                     :items="capitulos"
                     item-text="name"
                     item-value="id"
-                    readonly=true
+                    v-on:change="changeChapter"
                     return-object
                   ></v-select>
                   <v-text-field v-model="editedItem.active" label="Activo"></v-text-field>

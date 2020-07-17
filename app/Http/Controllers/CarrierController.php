@@ -71,10 +71,12 @@ class CarrierController extends Controller
             $carrierNew = new carrier();
         }
 
-        $carrierNew->rut    	= $carrier['rut'];
-        $carrierNew->dv   		= $carrier['dv'];
-        $carrierNew->name   	= $carrier['name'];
-        $carrierNew->address    = $carrier['address'];
+        $carrierNew->rut    	         = $carrier['rut'];
+        $carrierNew->dv   		         = $carrier['dv'];
+        $carrierNew->name   	         = $carrier['name'];
+        $carrierNew->address             = $carrier['address'];
+        $carrierNew->establishment_id    = $carrier['establishment_id'];
+        $carrierNew->registered          = 'YES';
 
 
         if ($carrierNew->save() ){

@@ -35,10 +35,10 @@ class LerSubChapterController extends Controller
             $lersubchapterNew = new lersubchapter();
         }
 
-        $lersubchapterNew->chapter_number  	= $lersubchapter['chapter_number'];
-        $lersubchapterNew->name   			= $lersubchapter['name'];
-        $lersubchapterNew->chapter_id  		= $lersubchapter['chapter_id'];
-        $lersubchapterNew->active    		= $lersubchapter['active'];
+        $lersubchapterNew->subchapter_number   = $lersubchapter['subchapter_number'];
+        $lersubchapterNew->name   			   = $lersubchapter['name'];
+        $lersubchapterNew->chapter_id  		   = $lersubchapter['chapter_id'];
+        $lersubchapterNew->active    		   = $lersubchapter['active'];
 
 
         if ($lersubchapterNew->save() ){

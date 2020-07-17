@@ -6,7 +6,7 @@ use App\MonthWaste;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class MonthWasteExport implements FromCollection, WithHeadings
+class MonthWasteExport implements WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection

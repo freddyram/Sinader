@@ -99,11 +99,6 @@ class DeclarationController extends Controller
     }
 
 
-    public function declaration($declaration_id){
-        $declaration = Declaration::where('id', $declaration_id)->get()->first();
-        return response()->json($declaration);   
-    }
-
     public function find($declaration_id){
         $declaration = Declaration::where('id', $declaration_id)->get()->first();
         return response()->json($declaration);   

@@ -6821,6 +6821,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6841,6 +6850,9 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Dirección',
         value: 'address'
       }, {
+        text: 'Establecimiento',
+        value: 'establishment_id'
+      }, {
         text: 'Acciones',
         value: 'actions'
       }],
@@ -6850,13 +6862,15 @@ __webpack_require__.r(__webpack_exports__);
         rut: 0,
         dv: '',
         name: '',
-        address: ''
+        address: '',
+        establishment_id: ''
       },
       defaultItem: {
         rut: 0,
         dv: '',
         name: '',
-        address: ''
+        address: '',
+        establishment_id: ''
       }
     };
   },
@@ -6873,6 +6887,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.initialize();
     this.getcarriers();
+    this.getestablishment();
   },
   methods: {
     initialize: function initialize() {
@@ -17389,6 +17404,28 @@ var render = function() {
                                       },
                                       expression: "editedItem.address"
                                     }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("v-select", {
+                                    attrs: {
+                                      label: "Establecimiento",
+                                      items: _vm.establishment,
+                                      "item-text": "name",
+                                      "item-value": "id",
+                                      readonly: "true",
+                                      "return-object": ""
+                                    },
+                                    model: {
+                                      value: _vm.editedItem.establishment_id,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.editedItem,
+                                          "establishment_id",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "editedItem.establishment_id"
+                                    }
                                   })
                                 ],
                                 1
@@ -18699,9 +18736,9 @@ var render = function() {
                                       items: _vm.capitulos,
                                       "item-text": "name",
                                       "item-value": "id",
-                                      readonly: "true",
                                       "return-object": ""
                                     },
+                                    on: { change: _vm.changeChapter },
                                     model: {
                                       value: _vm.editedItem.chapter_id,
                                       callback: function($$v) {
