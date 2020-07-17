@@ -201,7 +201,8 @@
         axios.post('/api/carrier/store', {carrier: carrier})
             .then(function (resp) {    
                 alert('Registro Grabado Correctamente!!');
-                app.carriers.push(resp.data);
+                //app.carriers.push(resp.data);
+                app.getcarriers();
                 EventBus.$emit('savecarrier', 'someValue');
             })
             .catch(function (resp) {

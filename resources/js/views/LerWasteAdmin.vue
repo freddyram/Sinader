@@ -261,12 +261,13 @@
         //  this.lerwaste.push(this.editedItem)
         //}
         
+
         var lerwaste = this.editedItem;
          
         axios.post('/api/lerwaste/store', {lerwaste: lerwaste})
             .then(function (resp) {    
                 alert('Registro Grabado Correctamente!!');
-                app.lerwaste.push(resp.data);
+                app.getlerwaste(); //app.lerwaste.push(resp.data);
                 EventBus.$emit('savelerwaste', 'someValue');
             })
             .catch(function (resp) {

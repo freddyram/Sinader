@@ -227,7 +227,8 @@
         axios.post('/api/lersubchapter/store', {lersubchapter: lersubchapter})
             .then(function (resp) {    
                 alert('Registro Grabado Correctamente!!');
-                app.lersubchapters.push(resp.data);
+                //app.lersubchapters.push(resp.data);
+                app.getlersubchapters();
                 EventBus.$emit('savelersubchapter', 'someValue');
             })
             .catch(function (resp) {

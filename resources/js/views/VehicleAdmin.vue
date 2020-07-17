@@ -226,7 +226,8 @@
         axios.post('/api/vehicle/store', {vehicle: vehicle})
             .then(function (resp) {    
                 alert('Registro Grabado Correctamente!!');
-                app.vehicles.push(resp.data);
+                app.getvehicles();
+                //app.vehicles.push(resp.data);
                 EventBus.$emit('saveVehicle', 'someValue');
             })
             .catch(function (resp) {

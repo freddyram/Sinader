@@ -2012,7 +2012,7 @@ __webpack_require__.r(__webpack_exports__);
           }, {
             icon: 'declaration',
             text: 'Mantenedor de Periodos de declaración',
-            link: '/declarationsperiodadmin'
+            link: '/periodsadmin'
           }, {
             icon: 'declaration',
             text: 'Reportes',
@@ -6894,8 +6894,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/carrier/store', {
         carrier: carrier
       }).then(function (resp) {
-        alert('Registro Grabado Correctamente!!');
-        app.carriers.push(resp.data);
+        alert('Registro Grabado Correctamente!!'); //app.carriers.push(resp.data);
+
+        app.getcarriers();
         _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$emit('savecarrier', 'someValue');
       })["catch"](function (resp) {
         console.log(resp);
@@ -7146,218 +7147,6 @@ __webpack_require__.r(__webpack_exports__);
         console.log(resp);
         alert("Error declarations/index :" + resp);
       });
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/DeclarationPeriodsAdmin.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/DeclarationPeriodsAdmin.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _eventbus_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../eventbus.js */ "./resources/js/eventbus.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      dialog: false,
-      headers: [{
-        text: 'Vehículo',
-        align: 'left',
-        sortable: false,
-        value: 'name'
-      }, {
-        text: 'Patente',
-        value: 'plate'
-      }, {
-        text: 'Transportista',
-        value: 'carrier_id'
-      }, {
-        text: 'Tipo de Vehículo',
-        value: 'vehicle_type_id'
-      }, {
-        text: 'Acciones',
-        value: 'actions'
-      }],
-      vehicles: [],
-      editedIndex: -1,
-      editedItem: {
-        name: '',
-        plate: 0,
-        carrier_id: 0,
-        vehicle_type_id: 0
-      },
-      defaultItem: {
-        name: '',
-        plate: 0,
-        carrier_id: 0,
-        vehicle_type_id: 0
-      }
-    };
-  },
-  computed: {
-    formTitle: function formTitle() {
-      return this.editedIndex === -1 ? 'Nuevo Registro' : 'Editar Registro';
-    }
-  },
-  watch: {
-    dialog: function dialog(val) {
-      val || this.close();
-    }
-  },
-  created: function created() {
-    this.initialize();
-    this.getvehicles();
-  },
-  methods: {
-    initialize: function initialize() {
-      this.vehicles = [];
-    },
-    getvehicles: function getvehicles() {
-      var app = this;
-      axios.get('/api/vehicle').then(function (resp) {
-        console.log(resp.data);
-        app.vehicles = resp.data;
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Error vehicle/index :" + resp);
-      });
-    },
-    edit_item: function edit_item(item) {
-      this.editedIndex = this.vehicles.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialog = true;
-    },
-    delete_item: function delete_item(item) {
-      var app = this;
-      var index = this.vehicles.indexOf(item);
-      var vehicleid = this.vehicles[index]["id"];
-      alert(this.vehicles[index]["id"]);
-
-      if (confirm('¿Está seguro de eliminar el registro?')) {
-        axios.post('/api/vehicle/delete/' + vehicleid).then(function (resp) {
-          app.vehicles.splice(index, 1);
-        })["catch"](function (resp) {
-          console.log(resp);
-          alert("Error vehicle/index :" + resp);
-        });
-      } else {
-        alert("no hay nada que borrar");
-      }
-    },
-    close: function close() {
-      var _this = this;
-
-      this.dialog = false;
-      setTimeout(function () {
-        _this.editedItem = Object.assign({}, _this.defaultItem);
-        _this.editedIndex = -1;
-      }, 300);
-    },
-    toSave: function toSave() {
-      var app = this;
-
-      if (this.editedIndex > -1) {
-        Object.assign(this.vehicles[this.editedIndex], this.editedItem);
-      } //else {
-      //  this.vehicles.push(this.editedItem)
-      //}
-
-
-      var vehicle = this.editedItem;
-      axios.post('/api/vehicle/store', {
-        vehicle: vehicle
-      }).then(function (resp) {
-        alert('Registro Grabado Correctamente!!');
-        app.vehicles.push(resp.data);
-        _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$emit('saveVehicle', 'someValue');
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Error vehicle/store :" + resp);
-      });
-      this.close();
     }
   }
 });
@@ -7769,7 +7558,8 @@ __webpack_require__.r(__webpack_exports__);
         lerchapter: lerchapter
       }).then(function (resp) {
         alert('Registro Grabado Correctamente!!');
-        app.lerchapters.push(resp.data);
+        app.getlerchapters(); //app.lerchapters.push(resp.data);
+
         _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$emit('savelerchapter', 'someValue');
       })["catch"](function (resp) {
         console.log(resp);
@@ -8023,8 +7813,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/lersubchapter/store', {
         lersubchapter: lersubchapter
       }).then(function (resp) {
-        alert('Registro Grabado Correctamente!!');
-        app.lersubchapters.push(resp.data);
+        alert('Registro Grabado Correctamente!!'); //app.lersubchapters.push(resp.data);
+
+        app.getlersubchapters();
         _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$emit('savelersubchapter', 'someValue');
       })["catch"](function (resp) {
         console.log(resp);
@@ -8319,7 +8110,8 @@ __webpack_require__.r(__webpack_exports__);
         lerwaste: lerwaste
       }).then(function (resp) {
         alert('Registro Grabado Correctamente!!');
-        app.lerwaste.push(resp.data);
+        app.getlerwaste(); //app.lerwaste.push(resp.data);
+
         _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$emit('savelerwaste', 'someValue');
       })["catch"](function (resp) {
         console.log(resp);
@@ -8469,7 +8261,7 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Id',
         value: ''
       }, {
-        text: 'Establesimiento',
+        text: 'Establecimiento',
         value: ''
       }, {
         text: 'Comuna',
@@ -8706,7 +8498,7 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Id',
         value: ''
       }, {
-        text: 'Establesimiento',
+        text: 'Establecimiento',
         value: ''
       }, {
         text: 'Comuna',
@@ -8944,7 +8736,7 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Id',
         value: ''
       }, {
-        text: 'Establesimiento',
+        text: 'Establecimiento',
         value: ''
       }, {
         text: 'Comuna',
@@ -9184,7 +8976,7 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Id',
         value: ''
       }, {
-        text: 'Establesimiento',
+        text: 'Establecimiento',
         value: ''
       }, {
         text: 'Comuna',
@@ -9309,6 +9101,207 @@ __webpack_require__.r(__webpack_exports__);
         console.log(resp);
         alert("Error declarations/export :" + resp);
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/PeriodsAdmin.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/PeriodsAdmin.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _eventbus_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../eventbus.js */ "./resources/js/eventbus.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dialog: false,
+      headers: [{
+        text: 'Periodos',
+        align: 'left',
+        sortable: false,
+        value: 'name'
+      }, {
+        text: 'Año',
+        value: 'year'
+      }, {
+        text: 'Mes',
+        value: 'month'
+      }, {
+        text: 'Acciones',
+        value: 'actions'
+      }],
+      period: [],
+      editedIndex: -1,
+      editedItem: {
+        year: 0,
+        month: 0
+      },
+      defaultItem: {
+        year: 0,
+        month: 0
+      }
+    };
+  },
+  computed: {
+    formTitle: function formTitle() {
+      return this.editedIndex === -1 ? 'Nuevo Registro' : 'Editar Registro';
+    }
+  },
+  watch: {
+    dialog: function dialog(val) {
+      val || this.close();
+    }
+  },
+  created: function created() {
+    this.initialize();
+    this.getperiods();
+  },
+  methods: {
+    initialize: function initialize() {
+      this.vehicles = [];
+    },
+    getperiods: function getperiods() {
+      var app = this;
+      axios.get('/api/period').then(function (resp) {
+        console.log(resp.data);
+        app.period = resp.data;
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error period/index :" + resp);
+      });
+    },
+    edit_item: function edit_item(item) {
+      this.editedIndex = this.periods.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+    delete_item: function delete_item(item) {
+      var app = this;
+      var index = this.periods.indexOf(item);
+      var periodid = this.periods[index]["id"];
+      alert(this.periods[index]["id"]);
+
+      if (confirm('¿Está seguro de eliminar el registro?')) {
+        axios.post('/api/period/delete/' + periodid).then(function (resp) {
+          app.periods.splice(index, 1);
+        })["catch"](function (resp) {
+          console.log(resp);
+          alert("Error vehicle/index :" + resp);
+        });
+      } else {
+        alert("no hay nada que borrar");
+      }
+    },
+    close: function close() {
+      var _this = this;
+
+      this.dialog = false;
+      setTimeout(function () {
+        _this.editedItem = Object.assign({}, _this.defaultItem);
+        _this.editedIndex = -1;
+      }, 300);
+    },
+    toSave: function toSave() {
+      var app = this;
+
+      if (this.editedIndex > -1) {
+        Object.assign(this.periods[this.editedIndex], this.editedItem);
+      } //else {
+      //  this.vehicles.push(this.editedItem)
+      //}
+
+
+      var vehicle = this.editedItem;
+      axios.post('/api/period/store', {
+        vehicle: vehicle
+      }).then(function (resp) {
+        alert('Registro Grabado Correctamente!!'); //app.vehicles.push(resp.data);
+
+        app.getperiods();
+        _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$emit('savePeriods', 'someValue');
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error period/store :" + resp);
+      });
+      this.close();
     }
   }
 });
@@ -9891,7 +9884,8 @@ __webpack_require__.r(__webpack_exports__);
         vehicle: vehicle
       }).then(function (resp) {
         alert('Registro Grabado Correctamente!!');
-        app.vehicles.push(resp.data);
+        app.getvehicles(); //app.vehicles.push(resp.data);
+
         _eventbus_js__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$emit('saveVehicle', 'someValue');
       })["catch"](function (resp) {
         console.log(resp);
@@ -14180,7 +14174,7 @@ var render = function() {
                                       box: "",
                                       placeholder: "Seleccionar",
                                       readonly: "",
-                                      label: "Empresa Trasnporte"
+                                      label: "Empresa Transporte"
                                     },
                                     on: { click: _vm.toTransport },
                                     model: {
@@ -16734,7 +16728,7 @@ var render = function() {
                                   box: "",
                                   placeholder: "Seleccionar",
                                   readonly: "",
-                                  label: "Empresa Trasnporte"
+                                  label: "Empresa Transporte"
                                 },
                                 on: { click: _vm.toSearch },
                                 model: {
@@ -17710,278 +17704,6 @@ var render = function() {
         ],
         1
       )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/DeclarationPeriodsAdmin.vue?vue&type=template&id=d7ef1630&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/DeclarationPeriodsAdmin.vue?vue&type=template&id=d7ef1630& ***!
-  \*********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "v-toolbar",
-        { attrs: { dark: "", color: "main_green" } },
-        [
-          _c("v-toolbar-title", [_vm._v("Vehiculos")]),
-          _vm._v(" "),
-          _c("v-divider", {
-            staticClass: "mx-2",
-            attrs: { inset: "", vertical: "" }
-          }),
-          _vm._v(" "),
-          _c("v-spacer"),
-          _vm._v(" "),
-          _c(
-            "v-dialog",
-            {
-              attrs: { "max-width": "500px" },
-              scopedSlots: _vm._u([
-                {
-                  key: "activator",
-                  fn: function(ref) {
-                    var on = ref.on
-                    return [
-                      _c(
-                        "v-btn",
-                        _vm._g(
-                          {
-                            staticClass: "mb-2",
-                            attrs: { color: "primary", dark: "" }
-                          },
-                          on
-                        ),
-                        [_vm._v("Nuevo Registro")]
-                      )
-                    ]
-                  }
-                }
-              ]),
-              model: {
-                value: _vm.dialog,
-                callback: function($$v) {
-                  _vm.dialog = $$v
-                },
-                expression: "dialog"
-              }
-            },
-            [
-              _vm._v(" "),
-              _c(
-                "v-card",
-                [
-                  _c("v-card-title", [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "headline",
-                        attrs: { color: "main_green", dark: "" }
-                      },
-                      [_vm._v(_vm._s(_vm.formTitle))]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-text",
-                    [
-                      _c(
-                        "v-container",
-                        { attrs: { "grid-list-md": "" } },
-                        [
-                          _c(
-                            "v-layout",
-                            { attrs: { wrap: "" } },
-                            [
-                              _c(
-                                "v-flex",
-                                { attrs: { xs12: "", sm6: "", md4: "" } },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: { label: "Nombre Vehículo" },
-                                    model: {
-                                      value: _vm.editedItem.name,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.editedItem, "name", $$v)
-                                      },
-                                      expression: "editedItem.name"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("v-text-field", {
-                                    attrs: { label: "Patente" },
-                                    model: {
-                                      value: _vm.editedItem.plate,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.editedItem, "plate", $$v)
-                                      },
-                                      expression: "editedItem.plate"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("v-text-field", {
-                                    attrs: { label: "Transportista" },
-                                    model: {
-                                      value: _vm.editedItem.carrier_id,
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.editedItem,
-                                          "carrier_id",
-                                          $$v
-                                        )
-                                      },
-                                      expression: "editedItem.carrier_id"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("v-text-field", {
-                                    attrs: { label: "Tipo de Vehículo" },
-                                    model: {
-                                      value: _vm.editedItem.vehicle_type_id,
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.editedItem,
-                                          "vehicle_type_id",
-                                          $$v
-                                        )
-                                      },
-                                      expression: "editedItem.vehicle_type_id"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-actions",
-                    [
-                      _c("v-spacer"),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          staticClass: "ma-2 white--text",
-                          attrs: { color: "main_green" },
-                          on: { click: _vm.close }
-                        },
-                        [_vm._v("Cancelar")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          staticClass: "ma-2 white--text",
-                          attrs: { color: "main_green" },
-                          on: {
-                            click: function($event) {
-                              return _vm.toSave()
-                            }
-                          }
-                        },
-                        [_vm._v("Grabar")]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("v-data-table", {
-        staticClass: "elevation-1",
-        attrs: { headers: _vm.headers, items: _vm.vehicles },
-        scopedSlots: _vm._u([
-          {
-            key: "items",
-            fn: function(props) {
-              return [
-                _c("td", [_vm._v(_vm._s(props.item.name))]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-xs-right" }, [
-                  _vm._v(_vm._s(props.item.plate))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-xs-right" }, [
-                  _vm._v(_vm._s(props.item.carrier_id))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-xs-right" }, [
-                  _vm._v(_vm._s(props.item.vehicle_type_id))
-                ]),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "justify-center layout px-0" },
-                  [
-                    _c(
-                      "v-btn",
-                      {
-                        attrs: { icon: "" },
-                        on: {
-                          click: function($event) {
-                            return _vm.edit_item(props.item)
-                          }
-                        }
-                      },
-                      [_c("v-icon", [_vm._v("edit")])],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-btn",
-                      {
-                        attrs: { icon: "" },
-                        on: {
-                          click: function($event) {
-                            return _vm.delete_item(props.item)
-                          }
-                        }
-                      },
-                      [_c("v-icon", [_vm._v("delete")])],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]
-            }
-          }
-        ])
-      })
     ],
     1
   )
@@ -20121,6 +19843,240 @@ var render = function() {
         ],
         1
       )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/PeriodsAdmin.vue?vue&type=template&id=4c7395bc&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/PeriodsAdmin.vue?vue&type=template&id=4c7395bc& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-toolbar",
+        { attrs: { dark: "", color: "main_green" } },
+        [
+          _c("v-toolbar-title", [_vm._v("Periodos")]),
+          _vm._v(" "),
+          _c("v-divider", {
+            staticClass: "mx-2",
+            attrs: { inset: "", vertical: "" }
+          }),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c(
+            "v-dialog",
+            {
+              attrs: { "max-width": "500px" },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-btn",
+                        _vm._g(
+                          {
+                            staticClass: "mb-2",
+                            attrs: { color: "secondary-green", dark: "" }
+                          },
+                          on
+                        ),
+                        [_vm._v("Nuevo Registro")]
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              _vm._v(" "),
+              _c(
+                "v-card",
+                [
+                  _c("v-card-title", [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "headline",
+                        attrs: { color: "main_green", dark: "" }
+                      },
+                      [_vm._v(_vm._s(_vm.formTitle))]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-text",
+                    [
+                      _c(
+                        "v-container",
+                        { attrs: { "grid-list-md": "" } },
+                        [
+                          _c(
+                            "v-layout",
+                            { attrs: { wrap: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", md4: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "Año" },
+                                    model: {
+                                      value: _vm.editedItem.year,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.editedItem, "year", $$v)
+                                      },
+                                      expression: "editedItem.year"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("v-text-field", {
+                                    attrs: { label: "Mes" },
+                                    model: {
+                                      value: _vm.editedItem.month,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.editedItem, "month", $$v)
+                                      },
+                                      expression: "editedItem.month"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          staticClass: "ma-2 white--text",
+                          attrs: { color: "main_green" },
+                          on: { click: _vm.close }
+                        },
+                        [_vm._v("Cancelar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          staticClass: "ma-2 white--text",
+                          attrs: { color: "main_green" },
+                          on: {
+                            click: function($event) {
+                              return _vm.toSave()
+                            }
+                          }
+                        },
+                        [_vm._v("Grabar")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-data-table", {
+        staticClass: "elevation-1",
+        attrs: { headers: _vm.headers, items: _vm.periods },
+        scopedSlots: _vm._u([
+          {
+            key: "items",
+            fn: function(props) {
+              return [
+                _c("td", [_vm._v(_vm._s(props.item.year))]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-right" }, [
+                  _vm._v(_vm._s(props.item.month))
+                ]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "justify-center layout px-0" },
+                  [
+                    _c(
+                      "v-btn",
+                      {
+                        attrs: { icon: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.edit_item(props.item)
+                          }
+                        }
+                      },
+                      [_c("v-icon", [_vm._v("edit")])],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-btn",
+                      {
+                        attrs: { icon: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.delete_item(props.item)
+                          }
+                        }
+                      },
+                      [_c("v-icon", [_vm._v("delete")])],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
+            }
+          }
+        ])
+      })
     ],
     1
   )
@@ -64873,7 +64829,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_LerChapterAdmin__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./views/LerChapterAdmin */ "./resources/js/views/LerChapterAdmin.vue");
 /* harmony import */ var _views_LerSubChapterAdmin__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./views/LerSubChapterAdmin */ "./resources/js/views/LerSubChapterAdmin.vue");
 /* harmony import */ var _views_LerWasteAdmin__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./views/LerWasteAdmin */ "./resources/js/views/LerWasteAdmin.vue");
-/* harmony import */ var _views_DeclarationPeriodsAdmin__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./views/DeclarationPeriodsAdmin */ "./resources/js/views/DeclarationPeriodsAdmin.vue");
+/* harmony import */ var _views_PeriodsAdmin__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./views/PeriodsAdmin */ "./resources/js/views/PeriodsAdmin.vue");
 
 
 
@@ -64959,9 +64915,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
     name: 'lerwasteadmin',
     component: _views_LerWasteAdmin__WEBPACK_IMPORTED_MODULE_16__["default"]
   }, {
-    path: '/declarationperiodsadmin',
-    name: 'declarationperiodsadmin',
-    component: _views_DeclarationPeriodsAdmin__WEBPACK_IMPORTED_MODULE_17__["default"]
+    path: '/periodsadmin',
+    name: 'periodsadmin',
+    component: _views_PeriodsAdmin__WEBPACK_IMPORTED_MODULE_17__["default"]
   }]
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
@@ -65269,75 +65225,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Declaration_vue_vue_type_template_id_3869482b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Declaration_vue_vue_type_template_id_3869482b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/views/DeclarationPeriodsAdmin.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/views/DeclarationPeriodsAdmin.vue ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _DeclarationPeriodsAdmin_vue_vue_type_template_id_d7ef1630___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeclarationPeriodsAdmin.vue?vue&type=template&id=d7ef1630& */ "./resources/js/views/DeclarationPeriodsAdmin.vue?vue&type=template&id=d7ef1630&");
-/* harmony import */ var _DeclarationPeriodsAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeclarationPeriodsAdmin.vue?vue&type=script&lang=js& */ "./resources/js/views/DeclarationPeriodsAdmin.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _DeclarationPeriodsAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _DeclarationPeriodsAdmin_vue_vue_type_template_id_d7ef1630___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _DeclarationPeriodsAdmin_vue_vue_type_template_id_d7ef1630___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/views/DeclarationPeriodsAdmin.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/views/DeclarationPeriodsAdmin.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/views/DeclarationPeriodsAdmin.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeclarationPeriodsAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./DeclarationPeriodsAdmin.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/DeclarationPeriodsAdmin.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeclarationPeriodsAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/views/DeclarationPeriodsAdmin.vue?vue&type=template&id=d7ef1630&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/views/DeclarationPeriodsAdmin.vue?vue&type=template&id=d7ef1630& ***!
-  \***************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeclarationPeriodsAdmin_vue_vue_type_template_id_d7ef1630___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DeclarationPeriodsAdmin.vue?vue&type=template&id=d7ef1630& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/DeclarationPeriodsAdmin.vue?vue&type=template&id=d7ef1630&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeclarationPeriodsAdmin_vue_vue_type_template_id_d7ef1630___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeclarationPeriodsAdmin_vue_vue_type_template_id_d7ef1630___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -65890,6 +65777,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListAdminMun_vue_vue_type_template_id_36b75a58___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListAdminMun_vue_vue_type_template_id_36b75a58___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/PeriodsAdmin.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/views/PeriodsAdmin.vue ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PeriodsAdmin_vue_vue_type_template_id_4c7395bc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PeriodsAdmin.vue?vue&type=template&id=4c7395bc& */ "./resources/js/views/PeriodsAdmin.vue?vue&type=template&id=4c7395bc&");
+/* harmony import */ var _PeriodsAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PeriodsAdmin.vue?vue&type=script&lang=js& */ "./resources/js/views/PeriodsAdmin.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PeriodsAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PeriodsAdmin_vue_vue_type_template_id_4c7395bc___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PeriodsAdmin_vue_vue_type_template_id_4c7395bc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/PeriodsAdmin.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/PeriodsAdmin.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/views/PeriodsAdmin.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PeriodsAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PeriodsAdmin.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/PeriodsAdmin.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PeriodsAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/PeriodsAdmin.vue?vue&type=template&id=4c7395bc&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/views/PeriodsAdmin.vue?vue&type=template&id=4c7395bc& ***!
+  \****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PeriodsAdmin_vue_vue_type_template_id_4c7395bc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PeriodsAdmin.vue?vue&type=template&id=4c7395bc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/PeriodsAdmin.vue?vue&type=template&id=4c7395bc&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PeriodsAdmin_vue_vue_type_template_id_4c7395bc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PeriodsAdmin_vue_vue_type_template_id_4c7395bc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

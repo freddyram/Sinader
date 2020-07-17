@@ -121,7 +121,7 @@
             { text: 'rut', value: '' }, 
             { text: 'Empresa', value: '' }, 
             { text: 'Id', value: '' }, 
-            { text: 'Establesimiento', value: '' },            
+            { text: 'Establecimiento', value: '' },            
             { text: 'Comuna', value: '' },
             { text: 'Region', value: '' },
         
